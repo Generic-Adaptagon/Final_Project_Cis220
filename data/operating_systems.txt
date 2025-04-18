@@ -1,0 +1,17 @@
+Category|ID|Name|Version|Hardware|Release Date
+LINUX|OS1|CentOS|8.0|x86-64|9/24/2019
+LINUX|OS2|Red Hat Enterprise Linux|8.0|POWER System - Little Endian|5/7/2019
+LINUX|OS3|Red Hat Enterprise Linux|8.0|x86-64|5/7/2019
+LINUX|OS4|Red Hat Enterprise Linux|9.0|POWER System - Little Endian|5/17/2022
+LINUX|OS5|Red Hat Enterprise Linux|9.0|x86-64|5/17/2022
+LINUX|OS6|SUSE Linux Enterprise Server|15.0|POWER System - Little Endian|8/16/2018
+LINUX|OS7|SUSE Linux Enterprise Server|15.0|x86-64|8/16/2018
+LINUX|OS8|Ubuntu|20.04|POWER System - Little Endian|4/23/2020
+LINUX|OS9|Ubuntu|20.04|x86-64|4/23/2020
+LINUX|OS10|Ubuntu|22.04|POWER System - Little Endian|4/21/2022
+LINUX|OS11|Ubuntu|22.04|x86-64|4/21/2022
+WINDOWS|OS12|Windows|10|x86-64|7/29/2015
+WINDOWS|OS13|Windows|11|x86-64|10/5/2021
+WINDOWS|OS14|Windows Server|2016|x86-64|10/12/2016
+WINDOWS|OS15|Windows Server|2019|x86-64|10/2/2018
+WINDOWS|OS16|Windows Server|2022|x86-64|8/18/2021
