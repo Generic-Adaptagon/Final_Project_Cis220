@@ -1,7 +1,10 @@
+
+/* THIS IS A TEMPLATE, ONLY COPY DO NOT USE - Ivan */
+
 # include <stdio.h>
 # define FLUSH while (getchar() != '\n')
 
-void mainMenu () {
+void MenuTemplate () { // FIXME change function name
 
 int choice = 0; // for the user's choice
 
@@ -34,3 +37,4 @@ do {
 
 
 }//mm
+

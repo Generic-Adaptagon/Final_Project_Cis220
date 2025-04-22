@@ -1,9 +1,10 @@
 #include <stdio.h>
 # include "mainMenu.c"
+# include "menuTemplate.c"
 
 int main () {
 
-printf ("FIXME: in main I need data input\n");
+printf (" (main) FIXME:I need data input\n");
 
 mainMenu();
 
