@@ -1,0 +1,26 @@
+CLOUD PLATFORM			
+ID	Name					Version		Release Date
+SS5	Amazon Web Services			2		2/10/2020
+SS6	Google Cloud				429		5/2/2023
+SS7	IBM Cloud				2.23		2/5/2024
+SS8	Microsoft Azure				2.59		9/28/2023
+
+DATABASES			
+ID	Name					Version		Release Date
+SS1	DB2 Enterprise Server Edition		11.5		6/27/2019
+SS2	Microsoft SQL Server			2022		11/16/2022
+SS3	Oracle Database 			21C		8/13/2021
+SS4	PostgresSQL				15.0		10/13/2022
+
+LDAP SERVERS			
+ID	Name					Version		Release Date
+SS12	IBM Security Verify Directory		10.0		12/9/2022
+SS13	Microsoft Active Directory		2022		8/18/2021
+SS14	NetIQ eDirectory			9.2.1		2/4/2020
+SS15	OpenLDAP				2.5		4/15/2021
+
+WEB SERVERS			
+ID	Name					Version		Release Date
+SS9	Apache HTTP Server			2.4.10		3/9/2022
+SS10	IBM HTTP Server				9.0.5		3/26/2021
+SS11	Microsoft Internet Information Services	10.0		7/29/2015
