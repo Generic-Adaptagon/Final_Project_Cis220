@@ -1,7 +1,8 @@
 //testing 
 #include <stdio.h>
 # include "mainMenu.c"
-# include "menuTemplate.c"
+//# include "menuTemplate.c"
+
 
 int main () {
 
