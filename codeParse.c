@@ -1,44 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "codeParse.h"
 
 #define MAX_LINE_LENGTH 1024
-
-// Structure definitions
-typedef struct OS {
-   char id[10];
-   char name[50];
-   char version[20];
-   char hardware[100];
-   char releaseDate[20];
-   struct OS* next;
-} OS;
-
-typedef struct Hypervisor {
-   char id[10];
-   char name[50];
-   char version[20];
-   char releaseDate[20];
-   struct Hypervisor* next;
-} Hypervisor;
-
-typedef struct Software {
-   char id[10];
-   char name[50];
-   char version[20];
-   char releaseDate[20];
-   struct Software* next;
-} Software;
-
-typedef struct Product {
-   char id[10];
-   char name[50];
-   char version[20];
-   char supportedOS[200];        // Store IDs of related OS (comma-separated)
-   char supportedSoftware[200]; // Store IDs of related Software
-   char supportedHypervisors[200]; // Store IDs of related Hypervisors
-   struct Product* next;
-} Product;
 
 // Linked lists for each category
 OS* osHead = NULL;
