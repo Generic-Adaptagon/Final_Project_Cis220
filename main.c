@@ -1,6 +1,6 @@
 //testing 
 #include <stdio.h>
-# include "mainMenu.c"
+# include "menu.h"
 //# include "menuTemplate.c"
 
 
