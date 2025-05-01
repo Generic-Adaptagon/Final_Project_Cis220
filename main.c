@@ -2,12 +2,29 @@
 #include <stdio.h>
 #include "codeParse.h"
 
+//Try1
+void printAllData();
 
+//Try1
+void printOS() {
+    OS* current = osHead;
+    printf("\nOperating Systems:\n\n");
+    while (current != NULL) {
+        printf("Category: %s\n", current->category);
+        printf("ID: %s\n", current->id);
+        printf("Name: %s\n", current->name);
+        printf("Version: %s\n", current->version);
+        printf("Hardware: %s\n", current->hardware);
+        printf("Release Date: %s\n\n", current->releaseDate);
+        current = current->next;
+    }
+}
+	
 
 
 int main () {
 
-	/*initializing structures*/
+	/*initializing structures
 		struct Product product1 = {
 		"P1", //ID
 		"WebSphere Application Server", //name
@@ -34,6 +51,7 @@ int main () {
 	product1.next = &product2;
 
 	struct Product product3 = {
+
 		"P3", //ID
 		"Tivoli Business Service Manager", //name
 		"6.2.0", //version
@@ -51,7 +69,7 @@ int main () {
 		"SS12",
 		"",
 		NULL};
-	product3.next = &product4;
+	product3.next = &product4; */ //Commented it out for testing-LM
 
 	
 	/*Jade something like this (below)*/
@@ -62,8 +80,15 @@ int main () {
     //loadData("data/hypervisors.txt", 1); // Load Hypervisor data
     //loadData("data/related_software.txt", 2);   // Load Software data
     //loadData("data/products.txt", 3);    // Load Product data
-	
-	
+
+//Try1-LM
+loadData("data/operating_systems.txt", 0);  // Load OS data
+loadData("data/hypervisors.txt", 1);        // Load Hypervisor data
+loadData("data/related_software.txt", 2);   // Load Software data
+loadData("data/products.txt", 3);           // Load Product data
+//Try1
+printOS();
+
 printf (" (main) FIXME:I need data input\n");
 
 /*Pass the Heads as pointers here to access the data later*/
