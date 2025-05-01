@@ -2,20 +2,43 @@
 #include <stdio.h>
 #include "codeParse.h"
 
-//Try1
-void printAllData();
 
 //Try1
 void printOS() {
     OS* current = osHead;
     printf("\nOperating Systems:\n\n");
-	printf("%-10s %-10s %-30s %-10s %-30s %-10s", "OS", "ID", "Name", "Version", "Hardware", "Release Date\n");
+	printf("%-15s %-15s %-40s %-15s %-35s %-10s \n", "OS", "ID", "Name", "Version", "Hardware", "Release Date");
+    while (current != NULL) {
+        printf("%-15s ", current->category);
+        printf("%-15s ", current->id);
+        printf("%-40s ", current->name);
+        printf("%-15s ", current->version);
+        printf("%-35s ", current->hardware);
+        printf("%-10s\n", current->releaseDate);
+        current = current->next;
+    }
+}
+void printHypervisor() {
+    Hypervisor* current = hypervisorHead;
+    printf("\nHypervisors:\n\n");
+	printf("%-15s %-40s %-15s %-10s \n", "ID", "Name", "Version", "Release Date");
+    while (current != NULL) {
+        printf("%-15s ", current->id);
+        printf("%-40s ", current->name);
+        printf("%-15s ", current->version);
+        printf("%-10s\n", current->releaseDate);
+        current = current->next;
+    }
+}
+void printSoftware() {
+    Software* current = softwareHead;
+    printf("\nSoftware:\n\n");
+	printf("%-10s %-15s %-40s %-30s %-10s\n", "OS", "ID", "Name", "Version", "Release Date");
     while (current != NULL) {
         printf("%-10s ", current->category);
-        printf("%-10s ", current->id);
-        printf("%-30s ", current->name);
-        printf("%-10s ", current->version);
-        printf("%-30s ", current->hardware);
+        printf("%-15s ", current->id);
+        printf("%-40s ", current->name);
+        printf("%-30s ", current->version);
         printf("%-10s\n", current->releaseDate);
         current = current->next;
     }
@@ -89,6 +112,10 @@ loadData("data/related_software.txt", 2);   // Load Software data
 loadData("data/products.txt", 3);           // Load Product data
 //Try1
 printOS(); //Prints everything on the OS file 
+
+printHypervisor();
+
+printSoftware();
 
 printf (" (main) FIXME:I need data input\n");
 
