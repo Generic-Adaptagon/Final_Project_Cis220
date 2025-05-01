@@ -10,12 +10,12 @@ void printOS() {
     OS* current = osHead;
     printf("\nOperating Systems:\n\n");
     while (current != NULL) {
-        printf("Category: %s\n", current->category);
-        printf("ID: %s\n", current->id);
-        printf("Name: %s\n", current->name);
-        printf("Version: %s\n", current->version);
-        printf("Hardware: %s\n", current->hardware);
-        printf("Release Date: %s\n\n", current->releaseDate);
+        printf("Category: %s ", current->category);
+        printf("ID: %s ", current->id);
+        printf("Name: %s ", current->name);
+        printf("Version: %s ", current->version);
+        printf("Hardware: %s ", current->hardware);
+        printf("Release Date: %s\n", current->releaseDate);
         current = current->next;
     }
 }
