@@ -1,9 +1,9 @@
 # include <stdio.h>
 # define FLUSH while (getchar() != '\n')
 #include "menu.h"
+#include "codeParse.h"
 
-void mainMenu () {
-
+void mainMenu (struct OS* osLL, struct Product* productLL) {
 
 int choice = 0; // for the user's choice
 
@@ -38,7 +38,7 @@ do {
 			break;
 			
 		case PRODMENU:
-			menuProducts();
+			menuProducts(productLL);
 			break;
 			
 		case OSMENU:
@@ -111,7 +111,7 @@ do {
 
 } // end of Menu
 /*Products Menu*/
-void menuProducts () { 
+void menuProducts (struct Product* productLL) { 
 
 int choice = 0; // for the user's choice
 

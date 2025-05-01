@@ -125,6 +125,7 @@ void loadData(const char* filename, int type) {
                return;
            }
            parseLine(line, "|", newOS, 0);
+		   printf("%c \n", *newOS->id);
            newOS->next = osHead;
            osHead = newOS;
        }
