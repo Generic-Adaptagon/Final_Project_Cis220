@@ -9,13 +9,14 @@ void printAllData();
 void printOS() {
     OS* current = osHead;
     printf("\nOperating Systems:\n\n");
+	printf("%-10s %-10s %-30s %-10s %-30s %-10s", "OS", "ID", "Name", "Version", "Hardware", "Release Date\n");
     while (current != NULL) {
-        printf("Category: %s ", current->category);
-        printf("ID: %s ", current->id);
-        printf("Name: %s ", current->name);
-        printf("Version: %s ", current->version);
-        printf("Hardware: %s ", current->hardware);
-        printf("Release Date: %s\n", current->releaseDate);
+        printf("%-10s ", current->category);
+        printf("%-10s ", current->id);
+        printf("%-30s ", current->name);
+        printf("%-10s ", current->version);
+        printf("%-30s ", current->hardware);
+        printf("%-10s\n", current->releaseDate);
         current = current->next;
     }
 }
@@ -87,7 +88,7 @@ loadData("data/hypervisors.txt", 1);        // Load Hypervisor data
 loadData("data/related_software.txt", 2);   // Load Software data
 loadData("data/products.txt", 3);           // Load Product data
 //Try1
-printOS();
+printOS(); //Prints everything on the OS file 
 
 printf (" (main) FIXME:I need data input\n");
 
