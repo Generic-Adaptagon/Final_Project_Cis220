@@ -4,6 +4,7 @@
 
 // Structure definitions
 typedef struct OS {
+   char category[20]; //WIP Added these missing ones -LM
    char id[10];
    char name[50];
    char version[20];
@@ -21,6 +22,7 @@ typedef struct Hypervisor {
 } Hypervisor;
 
 typedef struct Software {
+   char category[20]; //WIP Added these missing category for printing later  -LM
    char id[10];
    char name[50];
    char version[20];

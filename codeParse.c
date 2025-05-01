@@ -44,6 +44,9 @@ void parseLine(char* line, const char* delimiter, void* item, int type) {
    char* token = strtok(line, delimiter);
    if (type == 0) {  // OS
        OS* newOS = (OS*)item;
+	   strncpy(newOS->category, token ? token : "", sizeof(newOS->category)); // WIP added new "category" for later report printing -LM
+	   
+	   token = strtok(NULL, delimiter);
        strncpy(newOS->id, token ? token : "", sizeof(newOS->id));
 
        token = strtok(NULL, delimiter);
@@ -125,7 +128,7 @@ void loadData(const char* filename, int type) {
                return;
            }
            parseLine(line, "|", newOS, 0);
-		   printf("%c \n", *newOS->id);
+		   printf("%s \n", newOS->id); 			//changed %c to %s so it prints the whole string instead of first character -LM Change back if wrong lol 
            newOS->next = osHead;
            osHead = newOS;
        }
