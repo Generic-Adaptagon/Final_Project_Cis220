@@ -13,18 +13,18 @@ void mainMenu (struct OS* osLL, struct Hypervisor* hvLL, struct Software * sLL, 
 int choice = 0; // for the user's choice
 
 /*enumerations to make adding options easy; Shortened for typing convience*/
-enum CHOICES {EXIT = 1, HYPEMENU = 2, PRODMENU = 3, OSMENU = 4, RELTSOFTMENU = 5};
+enum CHOICES {EXIT = 5, HYPEMENU = 1, PRODMENU = 2, OSMENU = 3, RELTSOFTMENU = 4};
 
 /*start of menu loop*/
 do {
 	
 	/*Menu options*/
 	printf("Menu: make a choice:\n");
-	printf("1. Exit Menu\n");
-	printf("2. Hypervisor Menu\n");
-	printf("3. Products Menu\n");
-	printf("4. OS Menu\n");
-	printf("5. Related Software Menu\n");
+	printf("1. Hypervisor Menu\n");
+	printf("2. Products Menu\n");
+	printf("3. OS Menu\n");
+	printf("4. Related Software Menu\n");
+	printf("5. Exit Program\n");
 	
 	/*user choice*/
 	scanf (" %d", &choice);
@@ -35,7 +35,7 @@ do {
 		
 		/*Prints exiting and the current menu*/
 		case EXIT:
-			printf("Exiting Main Menu\n\n");
+			printf("Exiting Program\nThanks for Using!\n\n");
 			break; // end of EXIT
 			
 		case HYPEMENU:
@@ -76,7 +76,7 @@ void menuRelatedSoftware (struct Software* sLL, struct Product* pLL) {
 int choice = 0; // for the user's choice
 
 /*enumerations to make adding options easy*/
-enum CHOICES {EXIT = 1, GENERATE = 2, PRINTALL = 3};
+enum CHOICES {EXIT = 3, GENERATE = 1, PRINTALL = 2};
 
 /* start of menu*/
 do {
@@ -84,9 +84,9 @@ do {
 	/*Menu options*/
 	printf("\n"); //spacer
 	printf("Related Softwear Menu:\n    make a choice:\n");
-	printf("1. Exit Menu\n");
-	printf("2. Generate Report based on product\n"); 
-	printf("3. Print all Related Softwear\n"); 
+	printf("1. Generate Report based on product\n"); 
+	printf("2 Print all Related Softwear\n"); 
+	printf("3. Exit Menu\n");
 	
 	/*user choice*/
 	scanf (" %d", &choice);
@@ -128,7 +128,7 @@ void menuProducts (struct Product* productLL) {
 int choice = 0; // for the user's choice
 
 /*enumerations to make adding options easy*/
-enum CHOICES {EXIT = 1,  PRINTALL = 2};
+enum CHOICES {EXIT = 2,  PRINTALL = 1};
 
 /* start of menu*/
 do {
@@ -136,8 +136,8 @@ do {
 	/*Menu options*/
 	printf("\n"); //spacer
 	printf("Product Menu:\n    make a choice:\n");
-	printf("1. Exit Menu\n");
-	printf("2. Print all Menu Products\n"); 
+	printf("1. Print all Menu Products\n"); 
+	printf("2. Exit Menu\n");
 	
 	/*user choice*/
 	scanf (" %d", &choice);
@@ -174,7 +174,7 @@ void menuOS (struct OS* os, struct Product* pLL){
 int choice = 0; // for the user's choice
 
 /*enumerations to make adding options easy*/
-enum CHOICES {EXIT = 1, GENERATE = 2, PRINTALL = 3};
+enum CHOICES {EXIT = 3, GENERATE = 1, PRINTALL = 2};
 
 /* start of menu*/
 do {
@@ -182,9 +182,9 @@ do {
 	/*Menu options*/
 	printf("\n"); //spacer
 	printf("Menu OS:\n    make a choice:\n");
-	printf("1. Exit Menu\n");
-	printf("2. Generate Report based on product\n"); 
-	printf("3. Print all OS's\n"); 
+	printf("1. Generate Report based on product\n"); 
+	printf("2. Print all OS's\n"); 
+	printf("3. Exit Menu\n");
 	
 	/*user choice*/
 	scanf (" %d", &choice);
@@ -225,7 +225,7 @@ void menuHypervisor (struct Hypervisor* hvLL, struct Product* pLL) {
 int choice = 0; // for the user's choice
 
 /*enumerations to make adding options easy*/
-enum CHOICES {EXIT = 1, GENERATE = 2, PRINTALL = 3};
+enum CHOICES {EXIT = 3, GENERATE = 1, PRINTALL = 2};
 
 /* start of menu*/
 do {
@@ -233,9 +233,9 @@ do {
 	/*Menu options*/
 	printf("\n"); //spacer
 	printf("Hypervisor Menu:\n    make a choice:\n");
-	printf("1. Exit Menu\n");
-	printf("2. Generate Report based on product\n"); 
-	printf("3. Print all Hypervisors\n"); 
+	printf("1. Generate Report based on product\n"); 
+	printf("2. Print all Hypervisors\n"); 
+	printf("3. Exit Menu\n");
 	
 	/*user choice*/
 	scanf (" %d", &choice);
