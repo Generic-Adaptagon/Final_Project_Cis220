@@ -10,7 +10,9 @@ OS* osHead = NULL;
 Hypervisor* hypervisorHead = NULL;
 Software* softwareHead = NULL;
 Product* productHead = NULL;
-
+/* =============================================================
+Load Search function data
+=============================================================*/
 // Search functions
 OS* findOSByID(const char* id) {
     OS* current = osHead;
@@ -38,7 +40,9 @@ Hypervisor* findHypervisorByID(const char* id) {
     }
     return NULL;
 }
-
+/* =============================================================
+Parses lines
+=============================================================*/
 // Function to parse a line and store the data in the appropriate linked list
 void parseLine(char* line, const char* delimiter, void* item, int type) {
    char* token = strtok(line, delimiter);
@@ -107,9 +111,123 @@ void parseLine(char* line, const char* delimiter, void* item, int type) {
        strncpy(newProduct->supportedHypervisors, token ? token : "", sizeof(newProduct->supportedHypervisors));
    }
 }
+/* =============================================================
+Load OS data
+=============================================================*/
+void loadOSData (const char* filename, struct OS* osHead) { //created a load OS specific structure -ivan
+	 FILE* file = fopen(filename, "r");
+   if (!file) {
+       perror("Failed to open file");
+       return;
+   }
+	//OS* NodeHead = osHead;
+	OS* lastNode = osHead; // set the last node to header so function can add to this node -ivan
+   char line[MAX_LINE_LENGTH];
+   while (fgets(line, sizeof(line), file)) {
+       line[strcspn(line, "\n")] = 0;  // Remove newline
+
+           OS* newOS = malloc(sizeof(OS));
+           if (!newOS) {
+               perror("Memory allocation failed");
+               fclose(file);
+               return;
+           }
+		   
+           parseLine(line, "|", newOS, 0); // parsing Line os
+		   //printf("%s\n", newOS->id); //CODE PROBE
+			lastNode->next = newOS; // links noew node to the previous node - ivan
+			lastNode = newOS; // sets the last node to the last node.
+	   }
+   fclose(file);
+}// loadOSData
+/* =============================================================
+Load Hypervisor data
+=============================================================*/
+void loadHypeData (const char* filename, struct Hypervisor* hypeHead) { //created a load Hypervisor specific structure -ivan
+	 FILE* file = fopen(filename, "r");
+   if (!file) {
+       perror("Failed to open file");
+       return;
+   }
+
+	Hypervisor* lastNode = hypeHead; // set the last node to header so function can add to this node -ivan
+		char line[MAX_LINE_LENGTH];
+   while (fgets(line, sizeof(line), file)) {
+       line[strcspn(line, "\n")] = 0;  // Remove newline
+
+           Hypervisor* newHype = malloc(sizeof(Hypervisor));
+           if (!newHype) {
+               perror("Memory allocation failed");
+               fclose(file);
+               return;
+           }
+           parseLine(line, "|", newHype, 1); // parsing Line os
+			lastNode->next = newHype; // links noew node to the previous node - ivan
+			lastNode = newHype; // sets the last node to the last node.
+			
+   }
+   fclose(file);
+}// loadHypeData
+/* =============================================================
+Load Software data
+=============================================================*/
+void loadSoftData (const char* filename, struct Software* softHead) { //created a load Software specific structure -ivan
+	 FILE* file = fopen(filename, "r");
+   if (!file) {
+       perror("Failed to open file");
+       return;
+   }
+
+	Software* lastNode = softHead; // set the last node to header so function can add to this node -ivan
+		char line[MAX_LINE_LENGTH];
+   while (fgets(line, sizeof(line), file)) {
+       line[strcspn(line, "\n")] = 0;  // Remove newline
+
+           Software* newSoft= malloc(sizeof(Software));
+           if (!newSoft) {
+               perror("Memory allocation failed");
+               fclose(file);
+               return;
+           }
+           parseLine(line, "|", newSoft, 2); // parsing lines
+			lastNode->next = newSoft; // links noew node to the previous node - ivan
+			lastNode = newSoft; // sets the last node to the last node.
+			lastNode->next = newSoft; // links to the end of the list - Ivan
+   }
+   fclose(file);
+}// loadSoftData
+
+/* =============================================================
+Load product data
+=============================================================*/
+void loadProductData (const char* filename, struct Product* prodHead) { //created a load Product specific structure -ivan
+	 FILE* file = fopen(filename, "r");
+   if (!file) {
+       perror("Failed to open file");
+       return;
+   }
+
+	Product* lastNode = prodHead; // set the last node to header so function can add to this node -ivan
+		char line[MAX_LINE_LENGTH];
+   while (fgets(line, sizeof(line), file)) {
+       line[strcspn(line, "\n")] = 0;  // Remove newline
+
+           Product* newProd = malloc(sizeof(Product));
+           if (!newProd) {
+               perror("Memory allocation failed");
+               fclose(file);
+               return;
+           }
+           parseLine(line, "|", newProd, 3); // parsing lines
+			lastNode = newProd; // sets the last node to the last node.
+			lastNode->next = newProd; // links to the end of the list - Ivan  
+		}
+   fclose(file);
+}// loadSoftData
 
 // Function to load category data into linked lists
-void loadData(const char* filename, int type) {
+//Function Retired by Ivan, reason: made specific ones for each data type
+/*void loadData(const char* filename, int type) {
    FILE* file = fopen(filename, "r");
    if (!file) {
        perror("Failed to open file");
@@ -117,7 +235,7 @@ void loadData(const char* filename, int type) {
    }
 
    char line[MAX_LINE_LENGTH];
-   while (fgets(line, sizeof(line), file)) {
+   while (fgets(line, sizeof(line), file)) { // while file not empty
        line[strcspn(line, "\n")] = 0;  // Remove newline
 
        if (type == 0) {  // OS
@@ -168,4 +286,4 @@ void loadData(const char* filename, int type) {
    }
 
    fclose(file);
-}
+} */

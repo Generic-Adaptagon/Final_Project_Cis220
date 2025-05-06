@@ -1,6 +1,7 @@
 #include "menu.h"
 #include <stdio.h>
 #include "codeParse.h"
+#include <stdlib.h>
 
 
 //Try1
@@ -96,31 +97,28 @@ int main () {
 	product3.next = &product4; */ //Commented it out for testing-LM
 
 	
-	/*Jade something like this (below)*/
-	//loadData("data/file_name", #, &osHead);
-	
-	/*FIXME: pass in heads as pointers to load the data into*/
-	//loadData("data/operating_systems.txt", 0);        // Load OS data
-    //loadData("data/hypervisors.txt", 1); // Load Hypervisor data
-    //loadData("data/related_software.txt", 2);   // Load Software data
-    //loadData("data/products.txt", 3);    // Load Product data
 
-//Try1-LM
-loadData("data/operating_systems.txt", 0);  // Load OS data
-loadData("data/hypervisors.txt", 1);        // Load Hypervisor data
-loadData("data/related_software.txt", 2);   // Load Software data
-loadData("data/products.txt", 3);           // Load Product data
+
+OS* osHead = malloc(sizeof(OS)); 
+Hypervisor* hypervisorHead = malloc(sizeof(Hypervisor));
+Software * softwareHead = malloc(sizeof(Software));
+Product * productHead = malloc(sizeof(Product));
+
+loadOSData("data/operating_systems.txt", osHead);
+loadHypeData("data/hypervisors.txt", hypervisorHead);
+loadSoftData ("data/related_software.txt", softwareHead);
+loadProductData ("data/products.txt", productHead);
+
+
 //Try1
-printOS(); //Prints everything on the OS file 
+//printOS(); //Prints everything on the OS file --commented ALL out for testing
 
-printHypervisor();
+//printHypervisor();
 
-printSoftware();
-
-printf (" (main) FIXME:I need data input\n");
+//printSoftware();
 
 /*Pass the Heads as pointers here to access the data later*/
- mainMenu (osHead, productHead);
+ mainMenu (osHead, hypervisorHead, softwareHead, productHead);
 
 return 0;
 

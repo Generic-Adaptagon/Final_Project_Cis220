@@ -47,7 +47,11 @@ extern Product* productHead;
 
 // Function declarations
 void parseLine(char* line, const char* delimiter, void* item, int type);
-void loadData(const char* filename, int type);
+//void loadData(const char* filename, int type); retired by Ivan
+void loadOSData (const char* filename, struct OS* os);
+void loadHypeData (const char* filename, struct Hypervisor* hypeHead);
+void loadSoftData (const char* filename, struct Software* softHead);
+void loadProductData (const char* filename, struct Product* prodHead);
 
 OS* findOSByID(const char* id);
 Software* findSoftwareByID(const char* id);

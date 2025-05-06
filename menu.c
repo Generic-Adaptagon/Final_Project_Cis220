@@ -2,8 +2,13 @@
 # define FLUSH while (getchar() != '\n')
 #include "menu.h"
 #include "codeParse.h"
+#include "printers.h"
 
-void mainMenu (struct OS* osLL, struct Product* productLL) {
+/* =============================================================
+Main Menu
+=============================================================*/
+
+void mainMenu (struct OS* osLL, struct Hypervisor* hvLL, struct Software * sLL,  struct Product* pLL) {
 
 int choice = 0; // for the user's choice
 
@@ -30,23 +35,23 @@ do {
 		
 		/*Prints exiting and the current menu*/
 		case EXIT:
-			printf("Exiting [MENU HERE]\n\n");
+			printf("Exiting Main Menu\n\n");
 			break; // end of EXIT
 			
 		case HYPEMENU:
-			menuHypervisor();
+			menuHypervisor(hvLL, pLL);
 			break;
 			
 		case PRODMENU:
-			menuProducts(productLL);
+			menuProducts(pLL);
 			break;
 			
 		case OSMENU:
-			menuOS();
+			menuOS(osLL, pLL);
 			break;
 			
 		case RELTSOFTMENU:
-			menuRelatedSoftware();
+			menuRelatedSoftware(sLL, pLL);
 			break;
 						
 		/*error message and handeling*/	
@@ -61,10 +66,12 @@ do {
 
 } // end of Menu
 
-
+/* =============================================================
+Related software Menu
+=============================================================*/
 
 /*Related Software Menu*/
-void menuRelatedSoftware () { 
+void menuRelatedSoftware (struct Software* sLL, struct Product* pLL) { 
 
 int choice = 0; // for the user's choice
 
@@ -75,6 +82,7 @@ enum CHOICES {EXIT = 1, GENERATE = 2, PRINTALL = 3};
 do {
 	
 	/*Menu options*/
+	printf("\n"); //spacer
 	printf("Related Softwear Menu:\n    make a choice:\n");
 	printf("1. Exit Menu\n");
 	printf("2. Generate Report based on product\n"); 
@@ -93,7 +101,7 @@ do {
 			break; // end of EXIT
 		
 		case PRINTALL:
-			printf("(related softaware) FIXME: I need a print all related software menu.\n");
+			printAllSoft(sLL);
 			break;
 			
 		case GENERATE:
@@ -110,6 +118,10 @@ do {
 }  while (choice != EXIT);
 
 } // end of Menu
+
+/* =============================================================
+Products Menu
+=============================================================*/
 /*Products Menu*/
 void menuProducts (struct Product* productLL) { 
 
@@ -122,6 +134,7 @@ enum CHOICES {EXIT = 1,  PRINTALL = 2};
 do {
 	
 	/*Menu options*/
+	printf("\n"); //spacer
 	printf("Product Menu:\n    make a choice:\n");
 	printf("1. Exit Menu\n");
 	printf("2. Print all Menu Products\n"); 
@@ -139,7 +152,7 @@ do {
 			break; // end of EXIT
 		
 		case PRINTALL:
-			printf("(product Menu) FIXME: I need a print all related software menu.\n");
+			printAllProduct(productLL);
 			break;
 
 		/*error message and handeling*/	
@@ -152,9 +165,11 @@ do {
 }  while (choice != EXIT);
 
 } // end of Menu
-
+/* =============================================================
+OS Menu
+=============================================================*/
 /*OS Menu*/
-void menuOS () { 
+void menuOS (struct OS* os, struct Product* pLL){ 
 
 int choice = 0; // for the user's choice
 
@@ -165,6 +180,7 @@ enum CHOICES {EXIT = 1, GENERATE = 2, PRINTALL = 3};
 do {
 	
 	/*Menu options*/
+	printf("\n"); //spacer
 	printf("Menu OS:\n    make a choice:\n");
 	printf("1. Exit Menu\n");
 	printf("2. Generate Report based on product\n"); 
@@ -183,7 +199,7 @@ do {
 			break; // end of EXIT
 		
 		case PRINTALL:
-			printf("(OS Menu) FIXME: I need a print all related software menu.\n");
+			printAllOs(os);
 			break;
 			
 		case GENERATE:
@@ -200,9 +216,11 @@ do {
 }  while (choice != EXIT);
 
 } // end of Menu
+/* =============================================================
+Hypervisor Menu
+=============================================================*/
 
-/*Hypervisor Menu*/
-void menuHypervisor () { 
+void menuHypervisor (struct Hypervisor* hvLL, struct Product* pLL) { 
 
 int choice = 0; // for the user's choice
 
@@ -213,6 +231,7 @@ enum CHOICES {EXIT = 1, GENERATE = 2, PRINTALL = 3};
 do {
 	
 	/*Menu options*/
+	printf("\n"); //spacer
 	printf("Hypervisor Menu:\n    make a choice:\n");
 	printf("1. Exit Menu\n");
 	printf("2. Generate Report based on product\n"); 
@@ -231,7 +250,7 @@ do {
 			break; // end of EXIT
 		
 		case PRINTALL:
-			printf("(Hypervisor Menu) FIXME: I need a print all related software menu.\n");
+			printAllHype(hvLL);
 			break;
 			
 		case GENERATE:
