@@ -3,6 +3,7 @@
 #include "menu.h"
 #include "codeParse.h"
 #include "printers.h"
+#include "displayProductsUser.h"
 
 /* =============================================================
 Main Menu
@@ -105,7 +106,7 @@ do {
 			break;
 			
 		case GENERATE:
-		printf("(related softaware) FIXME: I need the displayProductsUser function AND the printing function.\n");
+		displayProductsUser(pLL);
 			break;
 			
 		/*error message and handeling*/	
