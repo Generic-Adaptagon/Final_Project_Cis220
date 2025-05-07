@@ -6,7 +6,7 @@
 struct Product* displayProductsUser(struct Product* p);
 
 // Function searches for a node with a specific data value, pseudocode found in PA 4.3.1 
-struct Product* ListSearch(struct Product* p, int userChoice);
+struct Product* ListSearch(struct Product* p, char* userChoice);
 
 
 #endif 

@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include "displayProductsUser.h"
 #include "codeParse.h"
 #include "menu.h"
@@ -11,47 +13,53 @@
 struct Product* displayProductsUser(struct Product* p) {
 	Product* currentProduct;
 	Product* nextProduct;
+	Product* check = NULL;
 	
 	currentProduct = p;
 	nextProduct = p;
 	
-	// currentProduct = currentProduct->next;
-	
-	printf("ID     Name\n");
+	printf("\n");
+	printf("-----------------------------------------------------------\n");
 	while (currentProduct != NULL) {
-		//printf("\nID\t\t:%s ;", currentProduct->id);
-		//printf("Name\t\t:%s ",currentProduct->name);
-		printf("%-4s ", currentProduct->id);
-		printf("%-8s \n",currentProduct->name);
-		/*printf("\nVersion\t\t:%s ",currentProduct->version);
-		printf("\nSupported OS\t\t:%s ",currentProduct->supportedOS);
-		printf("\nSupported Software\t\t:%s ",currentProduct->supportedSoftware);
-		printf("\nSupported Hypervisors\t:%s",currentProduct->supportedHypervisors);*/
-		
+		printf("%-5s%-5s%-6s \n", currentProduct->id, currentProduct->name, currentProduct->version);
 		currentProduct = currentProduct->next;
 	}
+	
+	
+/* Section that inputs user's choice and returns it */
+	char userChoice[10];
 
-// this can be the start of the Do-while loop
-	int userChoice = -1;
-	int option = 0;
-
-	printf("\nPlease enter the ID of product choice\nP:");
-	scanf("%d", &userChoice);
-	FLUSH; // Flushes the buffer so the program Doesn't loop
-
-	ListSearch(p, userChoice);
-	// this is the end and only exits if the ListSearch returns != NULL
+	printf("\nPlease enter the ID of product choice:   Example: [P1]\n");
+	scanf("%s", userChoice);
+	check = ListSearch(p, userChoice);
+	if (check == NULL) {
+		do {
+			printf("\nPlease enter 'P' and the number of product choice:   Example[P1]:\n");
+			scanf("%s", userChoice);
+			
+			check = ListSearch(p, userChoice);
+			
+			/* if (strcmp(userChoice, "r") == 0) {
+				mainMenu (osHead, hypervisorHead, softwareHead, productHead);
+			} */ //makes an infinite loop when going through 4, then 1 again SAD 		// I want an option where entering 'r' returns to Related Software Menu
+			
+		} while (check == NULL);
+		// this is the end and only exits if the ListSearch returns != NULL
+	}
+	FLUSH; // Flushes the buffer so the program Doesn't loop  // Where do I put this? - Ana
+	return check;
 }
 
-/* Section that inputs user's choice and returns it */
 // Function searches for a node with a specific data value, pseudocode found in PA 4.3.1 
-struct Product* ListSearch(struct Product* p, int userChoice) {
+struct Product* ListSearch(struct Product* p, char* userChoice) {
+    struct Product* currProd = p;
+	int i;
 	
-	//Also please handle the user error if the the program didn't find the 
-		//ID in the  DisplayProductUser function
-    struct Product* currProd = p; 		// productHead ??
     while (currProd != NULL) {
-        if (*currProd->id == userChoice) {  //THIS should be string not integer, ID = "P1" not an interger
+		for (i = 0; userChoice[i] != '\0'; i++) {
+		userChoice[i] = toupper(userChoice[i]);
+		}
+        if (strcmp(currProd->id, userChoice) == 0) {
             return currProd;
         }
         currProd = currProd->next;

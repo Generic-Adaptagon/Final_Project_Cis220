@@ -86,9 +86,9 @@ do {
 	
 	/*Menu options*/
 	printf("\n"); //spacer
-	printf("Related Softwear Menu:\n    make a choice:\n");
+	printf("Related Software Menu:\n    make a choice:\n");
 	printf("1. Generate Report based on product\n"); 
-	printf("2 Print all Related Softwear\n"); 
+	printf("2 Print all Related Software\n"); 
 	printf("3. Exit Menu\n");
 	
 	/*user choice*/
