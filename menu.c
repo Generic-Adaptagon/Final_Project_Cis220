@@ -4,6 +4,7 @@
 #include "codeParse.h"
 #include "printers.h"
 #include "displayProductsUser.h"
+#include <stdlib.h>
 
 /* =============================================================
 Main Menu
@@ -75,6 +76,7 @@ Related software Menu
 void menuRelatedSoftware (struct Software* sLL, struct Product* pLL) { 
 
 int choice = 0; // for the user's choice
+struct Product* userChoice= malloc(sizeof(Product)); // users choice
 
 /*enumerations to make adding options easy*/
 enum CHOICES {EXIT = 3, GENERATE = 1, PRINTALL = 2};
@@ -106,7 +108,8 @@ do {
 			break;
 			
 		case GENERATE:
-		displayProductsUser(pLL);
+			userChoice = displayProductsUser(pLL);
+			printf("Returned node: ID = %s\n", userChoice->id);
 			break;
 			
 		/*error message and handeling*/	

@@ -219,8 +219,8 @@ void loadProductData (const char* filename, struct Product* prodHead) { //create
                return;
            }
            parseLine(line, "|", newProd, 3); // parsing lines
-			lastNode = newProd; // sets the last node to the last node.
 			lastNode->next = newProd; // links to the end of the list - Ivan  
+			lastNode = newProd; // sets the last node to the last node.
 		}
    fclose(file);
 }// loadSoftData
