@@ -117,12 +117,19 @@ void printAllSoft (struct Software* soft) {
 	
 }
 void printAllProduct (struct Product* prod) {
-		while (prod != NULL) {
-		printf("Prod Id:%s is printing\n", prod->id);
-		
-		prod = prod->next;
-	}
-	printf ("(Printers.c) FIXME need code for printing all\n"); //delete
-}
+     printf("\nProduct:\n\n");
+    printf("%-3s %-47s %-8s %-70s %-61s %s\n", "ID", "Name", "Version",  "Supported OS", "Supported Software", "Supported Hypervisors");
 
+        while (prod != NULL) {
+//printf("Prod Id:%s is printing\n", prod->id);
+        printf("%-3s ", prod->id);
+        printf("%-47s ", prod->name);
+        printf("%-8s ", prod->version);
+        printf("%-70s ", prod->supportedOS);
+        printf("%-61s ", prod->supportedSoftware);
+        printf("%s\n", prod->supportedHypervisors);
+    prod = prod->next;
+    }
+//    printf ("(Printers.c) FIXME need code for printing all\n"); //delete
+}
 
