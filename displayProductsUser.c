@@ -13,6 +13,12 @@
 
 // gcc main.c menu.c codeParse.c displayProductsUser.c printers.c
 // menu calls though this "void menuProducts (struct Product* productLL)"
+/* =============================================================
+displayProducts menu
+returns the product node if user selected something
+returns NULL if user exited menu // as per Ana's request to exit printing function
+
+=============================================================*/
 struct Product* displayProductsUser(struct Product* p) {
 	Product* currentProduct;
 	Product* check = NULL;
@@ -26,22 +32,46 @@ struct Product* displayProductsUser(struct Product* p) {
 		printf("%-5s%-50s%5s \n", currentProduct->id, currentProduct->name, currentProduct->version);
 		currentProduct = currentProduct->next;
 	}
+
+	/* =============================================================
+userSkip
+this function returns true if the user input is the same as the exit input
+returns false if thethe input is not set to the exit string
+
+=============================================================*/
+int userSkip(char userInput[]){
+	int ptrue = 1;
+	int pfalse = 0;
 	
-	
+	if (strcmp(userInput, "exit") == 0 || strcmp(userInput, "Exit") == 0) { // note to self, has to be set to 0 because of the way string compare works 0 = matches
+			return ptrue;
+		}
+		
+	return pfalse;
+}
+
 /* Section that inputs user's choice and returns it */
 	char userChoice[10];
 	Product product;
 	Software software;
 	
-	printf("\nPlease enter the ID of product choice - Example:[P1]\nProduct:");
+	printf("\nPlease enter the ID of product choice - Example:[P1]\nIf you wish to exit type \"exit\"\nProduct:");
 	scanf("%s", userChoice);
+	
+	
+/*check if user wishes to skip*/
+		if (userSkip(userChoice)) {
+			printf("Exiting Selection\n");
+			return NULL;
+		}
+	
 	check = ListSearch(p, userChoice);
 	
-	if (check == NULL) {
+	if (check == NULL) { // if errors
 		do {
 			flush_input( );
 			
-			printf("\n---------------------------------------------------------------\n\nUh oh! Invalid ID.\n\nPlease enter 'P' and the number of product choice ~ Example:[P1]\n");
+			printf("\n---------------------------------------------------------------\n\nUh oh! Invalid ID.\n\nPlease enter 'P' and the number of product choice ~ Example:[P1]\nIf you wish to exit type \"exit\"\n");
 			// printf("\n\t\t\t\t-or-\n\nEnter 'r' to return to \"Related Software Menu\"\n");
 			printf("\nChoice: ");
 			scanf("%s", userChoice);
@@ -50,6 +80,14 @@ struct Product* displayProductsUser(struct Product* p) {
 				menuRelatedSoftware(&software, &product); 		// FIX: When called does NOT display product node datas AHHHH
 			} */
 			
+		/*returns NULL to escape from product selection*/
+		/*check if user wishes to skip*/
+		if (userSkip(userChoice)) {
+			printf("Exiting Selection\n");
+			return NULL;
+		}
+
+
 			check = ListSearch(p, userChoice);
 			
 		} while (check == NULL);

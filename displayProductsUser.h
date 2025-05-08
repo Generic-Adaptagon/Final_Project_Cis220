@@ -10,5 +10,7 @@ struct Product* ListSearch(struct Product* p, char* userChoice);
 
 // Function flushes input to prevent loop bugs
 void flush_input( );
+// of use skips the product selection
+int userSkip(char userInput[]);
 
 #endif 
