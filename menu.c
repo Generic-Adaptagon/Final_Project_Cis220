@@ -1,10 +1,54 @@
 # include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 # define FLUSH while (getchar() != '\n')
 #include "menu.h"
 #include "codeParse.h"
 #include "printers.h"
 #include "displayProductsUser.h"
-#include <stdlib.h>
+
+/* =============================================================
+Menu display
+	This function displays a menu header
+=============================================================*/
+
+void menuDisplay(char menuName[]) {
+	
+	char menuHeader[20];
+	int length = 0;
+	int count = 0; // counting var
+	
+	/*copies the menu name into the menu header*/
+	strcpy(menuHeader, menuName);
+	/*concatinates " menu"*/
+	strcat(menuHeader, " Menu");
+	
+	/*gets length*/
+	length = strlen(menuHeader);
+
+	/*prints out the menu header as triple the length of the menu string*/
+	for (count = 1; count < length * 3; count++) {
+		printf("=");
+	}
+	printf("\n");
+	
+	/*prints out the menu spacing so that menu name appears in the middle*/
+	for (count = 1; count < length ; count++) {
+		printf(" ");
+	}
+		// print menu
+	printf("%s\n", menuHeader); 
+
+	/*prints out the menu Footer as triple the length of the menu string*/
+	for (count = 1; count < length * 3; count++) {
+		printf("=");
+	}
+	printf("\n");
+	
+	/*prompts user*/
+	printf("Select an Option: \n");
+	
+}
 
 /* =============================================================
 Main Menu
@@ -15,17 +59,18 @@ void mainMenu (struct OS* osLL, struct Hypervisor* hvLL, struct Software * sLL, 
 int choice = 0; // for the user's choice
 
 /*enumerations to make adding options easy; Shortened for typing convience*/
-enum CHOICES {EXIT = 5, HYPEMENU = 1, PRODMENU = 2, OSMENU = 3, RELTSOFTMENU = 4};
+enum CHOICES {EXIT = 5, HYPEMENU = 1, PRODMENU = 4, OSMENU = 2, RELTSOFTMENU = 3};
 
 /*start of menu loop*/
 do {
 	
 	/*Menu options*/
-	printf("Menu: make a choice:\n");
+	menuDisplay("Main");
+	//printf("Menu: make a choice:\n");
 	printf("1. Hypervisor Menu\n");
-	printf("2. Products Menu\n");
-	printf("3. OS Menu\n");
-	printf("4. Related Software Menu\n");
+	printf("2. OS Menu\n");
+	printf("3. Related Software Menu\n");
+	printf("4. Products Menu\n");
 	printf("5. Exit Program\n");
 	
 	/*user choice*/
@@ -86,6 +131,7 @@ do {
 	
 	/*Menu options*/
 	printf("\n"); //spacer
+	menuDisplay("Related Software");
 	printf("Related Software Menu:\n    make a choice:\n");
 	printf("1. Generate Report based on product\n"); 
 	printf("2 Print all Related Software\n"); 
@@ -125,7 +171,6 @@ do {
 /* =============================================================
 Products Menu
 =============================================================*/
-/*Products Menu*/
 void menuProducts (struct Product* productLL) { 
 
 int choice = 0; // for the user's choice
@@ -138,7 +183,7 @@ do {
 	
 	/*Menu options*/
 	printf("\n"); //spacer
-	printf("Product Menu:\n    make a choice:\n");
+	menuDisplay("Product");
 	printf("1. Print all Menu Products\n"); 
 	printf("2. Exit Menu\n");
 	
@@ -184,7 +229,7 @@ do {
 	
 	/*Menu options*/
 	printf("\n"); //spacer
-	printf("Menu OS:\n    make a choice:\n");
+	menuDisplay("OS");
 	printf("1. Generate Report based on product\n"); 
 	printf("2. Print all OS's\n"); 
 	printf("3. Exit Menu\n");
@@ -235,7 +280,7 @@ do {
 	
 	/*Menu options*/
 	printf("\n"); //spacer
-	printf("Hypervisor Menu:\n    make a choice:\n");
+	menuDisplay("Hypervisor");
 	printf("1. Generate Report based on product\n"); 
 	printf("2. Print all Hypervisors\n"); 
 	printf("3. Exit Menu\n");
