@@ -80,7 +80,11 @@ void parseLine(char* line, const char* delimiter, void* item, int type) {
    }
    else if (type == 2) {  // Software
        Software* newSoftware = (Software*)item;
-       strncpy(newSoftware->id, token ? token : "", sizeof(newSoftware->id));
+      
+	  strncpy(newSoftware->category, token ? token : "", sizeof(newSoftware->category)); // added missing printing data - Ivan
+	   
+	  token = strtok(NULL, delimiter);
+	   strncpy(newSoftware->id, token ? token : "", sizeof(newSoftware->id));
 
        token = strtok(NULL, delimiter);
        strncpy(newSoftware->name, token ? token : "", sizeof(newSoftware->name));
@@ -190,9 +194,8 @@ void loadSoftData (const char* filename, struct Software* softHead) { //created 
                return;
            }
            parseLine(line, "|", newSoft, 2); // parsing lines
-			lastNode->next = newSoft; // links noew node to the previous node - ivan
+			lastNode->next = newSoft; // links new node to the previous node - ivan
 			lastNode = newSoft; // sets the last node to the last node.
-			lastNode->next = newSoft; // links to the end of the list - Ivan
    }
    fclose(file);
 }// loadSoftData

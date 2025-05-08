@@ -9,5 +9,8 @@ void printAllHype (struct Hypervisor* hype);
 void printAllSoft (struct Software* soft);
 void printAllProduct (struct Product* prod);
 
+void printProductOs (struct OS* os, struct Product* p);
+void printProductHype (struct Hypervisor *hype, struct Product* p);
+void printProductSoft (struct Software* soft, struct Product* p);
 
 #endif

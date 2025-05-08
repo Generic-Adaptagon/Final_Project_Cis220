@@ -108,8 +108,7 @@ do {
 			break;
 			
 		case GENERATE:
-			userChoice = displayProductsUser(pLL);
-			printf("Returned node: ID = %s\n", userChoice->id);
+			printProductSoft (sLL, pLL);
 			break;
 			
 		/*error message and handeling*/	
@@ -207,7 +206,7 @@ do {
 			break;
 			
 		case GENERATE:
-		printf("(OS Menu) FIXME: I need the displayProductsUser function AND the printing function.\n");
+			printProductOs (os, pLL);		
 			break;
 			
 		/*error message and handeling*/	
@@ -258,7 +257,7 @@ do {
 			break;
 			
 		case GENERATE:
-		printf("(Hypervisor Menu) FIXME: I need the displayProductsUser function AND the printing function.\n");
+			printProductHype (hvLL, pLL);
 			break;
 			
 		/*error message and handeling*/	
