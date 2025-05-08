@@ -26,8 +26,6 @@ void printProductOs (struct OS* os, struct Product* p) {
 	
 	userChoice = displayProductsUser(p); // this returns the Product Node that the user chose
 	
-	//return null if want to exit out of printing
-	
 	if (userChoice != NULL) {
 	/*print related data*/
 	printf("Returned node: ID = %s\n", userChoice->id);
@@ -41,8 +39,10 @@ void printProductHype (struct Hypervisor *hype, struct Product* p) {
 	struct Product* userChoice = malloc(sizeof(Product)); // this is the users product choice
 	
 	userChoice = displayProductsUser(p); // this returns the Product Node that the user chose
+	if (userChoice != NULL) {
+	/*print related data*/
 	printf("Returned node: ID = %s\n", userChoice->id);
-	
+	} 
 	return;
 }
 void printProductSoft (struct Software* sof, struct Product* p) {
@@ -50,7 +50,10 @@ void printProductSoft (struct Software* sof, struct Product* p) {
 	struct Product* userChoice = malloc(sizeof(Product)); // this is the users product choice
 	
 	userChoice = displayProductsUser(p); // this returns the Product Node that the user chose
+	if (userChoice != NULL) {
+	/*print related data*/
 	printf("Returned node: ID = %s\n", userChoice->id);
+	} 
 	
 	return;
 }
