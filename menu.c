@@ -9,13 +9,13 @@
 
 /* =============================================================
 Menu display
-	This function displays a menu header
+	This function displays a menu header given the menu name and prompts the user
 =============================================================*/
 
 void menuDisplay(char menuName[]) {
 	
 	char menuHeader[20];
-	int length = 0;
+	int length = 0; // for length for string 
 	int count = 0; // counting var
 	
 	/*copies the menu name into the menu header*/
@@ -52,6 +52,8 @@ void menuDisplay(char menuName[]) {
 
 /* =============================================================
 Main Menu
+ this is the main menu. It branches out to all the other menus and functions. This can be considered the
+ central hub
 =============================================================*/
 
 void mainMenu (struct OS* osLL, struct Hypervisor* hvLL, struct Software * sLL,  struct Product* pLL) {
@@ -65,8 +67,8 @@ enum CHOICES {EXIT = 5, HYPEMENU = 1, PRODMENU = 4, OSMENU = 2, RELTSOFTMENU = 3
 do {
 	
 	/*Menu options*/
+	/*dispaly Menu title and prompt user*/
 	menuDisplay("Main");
-	//printf("Menu: make a choice:\n");
 	printf("1. Hypervisor Menu\n");
 	printf("2. OS Menu\n");
 	printf("3. Related Software Menu\n");
@@ -85,18 +87,22 @@ do {
 			printf("Exiting Program\nThanks for Using!\n\n");
 			break; // end of EXIT
 			
+			/*go to hypervisor menu*/
 		case HYPEMENU:
 			menuHypervisor(hvLL, pLL);
 			break;
 			
+			/*go to Product menu*/
 		case PRODMENU:
 			menuProducts(pLL);
 			break;
 			
+			/*go to Operating System menu*/
 		case OSMENU:
 			menuOS(osLL, pLL);
 			break;
 			
+			/*go to Related Software menu*/
 		case RELTSOFTMENU:
 			menuRelatedSoftware(sLL, pLL);
 			break;
@@ -116,8 +122,6 @@ do {
 /* =============================================================
 Related software Menu
 =============================================================*/
-
-/*Related Software Menu*/
 void menuRelatedSoftware (struct Software* sLL, struct Product* pLL) { 
 
 int choice = 0; // for the user's choice
@@ -131,10 +135,11 @@ do {
 	
 	/*Menu options*/
 	printf("\n"); //spacer
+	/*dispaly Menu title and prompt user*/
 	menuDisplay("Related Software");
 	printf("Related Software Menu:\n    make a choice:\n");
 	printf("1. Generate Report based on product\n");
-	printf("2. Print all Related Software\n"); 		// Aesthetics: added a '.' after 2
+	printf("2. Print all Related Software\n"); 		
 	printf("3. Exit Menu\n");
 	
 	/*user choice*/
@@ -143,16 +148,18 @@ do {
 	/*Switch statement for  user's choice*/
 	switch (choice) 
 	{
-		
+	
 		/*Prints exiting and the current menu*/
 		case EXIT:
 			printf("Exiting Related Softwear Menu\n\n");
 			break; // end of EXIT
 		
+		/*print all products*/
 		case PRINTALL:
 			printAllSoft(sLL);
 			break;
 			
+		/*print software based on user choice*/
 		case GENERATE:
 			printProductSoft (sLL, pLL);
 			break;
@@ -183,6 +190,7 @@ do {
 	
 	/*Menu options*/
 	printf("\n"); //spacer
+	/*dispaly Menu title and prompt user*/
 	menuDisplay("Product");
 	printf("1. Print all Menu Products\n"); 
 	printf("2. Exit Menu\n");
@@ -198,7 +206,8 @@ do {
 		case EXIT:
 			printf("Exiting Products Menu\n\n");
 			break; // end of EXIT
-		
+
+		/*print all products*/		
 		case PRINTALL:
 			printAllProduct(productLL);
 			break;
@@ -229,6 +238,7 @@ do {
 	
 	/*Menu options*/
 	printf("\n"); //spacer
+	/*dispaly Menu title and prompt user*/
 	menuDisplay("OS");
 	printf("1. Generate Report based on product\n"); 
 	printf("2. Print all OS's\n"); 
@@ -246,10 +256,12 @@ do {
 			printf("Exiting OS Menu\n\n");
 			break; // end of EXIT
 		
+		/*prints all Operating systems*/
 		case PRINTALL:
 			printAllOs(os);
 			break;
 			
+		/*print Operating systems based on user choice*/
 		case GENERATE:
 			printProductOs (os, pLL);		
 			break;
@@ -280,6 +292,7 @@ do {
 	
 	/*Menu options*/
 	printf("\n"); //spacer
+	/*dispaly Menu title and prompt user*/
 	menuDisplay("Hypervisor");
 	printf("1. Generate Report based on product\n"); 
 	printf("2. Print all Hypervisors\n"); 
@@ -297,10 +310,12 @@ do {
 			printf("Exiting Hypervisor Menu\n\n");
 			break; // end of EXIT
 		
+		/*print ALL hypervisors*/
 		case PRINTALL:
 			printAllHype(hvLL);
 			break;
 			
+			/*print Hypervisros based on the user's choice*/
 		case GENERATE:
 			printProductHype (hvLL, pLL);
 			break;
