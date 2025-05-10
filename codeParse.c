@@ -65,7 +65,7 @@ Hypervisor* findHypervisorByID(const char* id, struct Hypervisor* hypervisorHead
 	    if (strcmp(current->id, id) == 0 || strcmp(otherOption, id) == 0) return current;
         current = current->next;
     }
-			printf("RETURNED NUL\n");//FIXME
+			
     return NULL;
 }
 /* =============================================================
@@ -167,7 +167,7 @@ void loadOSData (const char* filename, struct OS* osHead) { //created a load OS 
            }
 		   
            parseLine(line, "|", newOS, 0); // parsing Line os
-		   printf("category loaded into Os Structure: %s\n", newOS->category); //CODE PROBE
+		   //printf("category loaded into Os Structure: %s\n", newOS->category); //CODE PROBE
 			lastNode->next = newOS; // links noew node to the previous node - ivan
 			lastNode = newOS; // sets the last node to the last node.
 	   }
