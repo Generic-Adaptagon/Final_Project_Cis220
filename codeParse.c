@@ -155,7 +155,7 @@ void loadOSData (const char* filename, struct OS* osHead) { //created a load OS 
 	//OS* NodeHead = osHead;
 	OS* lastNode = osHead; // set the last node to header so function can add to this node -ivan
    char line[MAX_LINE_LENGTH];
-   fgets(line, sizeof(line), file);
+   fgets(line, sizeof(line), file); // gets the Header
    while (fgets(line, sizeof(line), file)) {
        line[strcspn(line, "\n")] = 0;  // Remove newline
 
