@@ -14,65 +14,45 @@ void printProductOs (struct OS* os, struct Product* p) {
 	
 	
 	struct Product* userChoice = malloc(sizeof(Product)); // this is the users product choice
+	struct OS* printingOS = malloc(sizeof(OS)); // This is the OS that is going to be printed
+	char supportedOss[100]; // used for strtok function to get a substring
+
 	userChoice = displayProductsUser(p); // this returns the Product Node that the user chose
 	
 	/*if user choose to skip product selection*/
 	if (userChoice == NULL) {
 	return;
 	} 
+		
+	/*transfers OS Information*/
+	strcpy (supportedOss, userChoice->supportedOS);
+	/*gets the first OS Id from the Os String*/
+	char* token = strtok(supportedOss, ","); 
+
 	
-	    printf("%-3s ", userChoice->id);
-        printf("%-30s ", userChoice->name);
-        printf("%-8s \n", userChoice->version);
-        printf("%-70s \n ", userChoice->supportedOS);
-        printf("%-61s \n", userChoice->supportedSoftware);
-        printf("%s\n \n", userChoice->supportedHypervisors);
-		
-	//loop through the String and pull out and search for the OS
-	int count = 0; //counting car
-	int idCount = 0;// counting var for IDString
-	int length = strlen(userChoice->supportedOS); // length for the string
-	char test = 'a';
-	char test2 = userChoice->supportedOS[count]; //initilizating
-	char idString[10];
-		//pull out the string unil ',' then search that ID of that string
-		
-		printf("%d\n", length);
-		
-		for (count = 1; count <= length;count++) {
-		//while (test2 !='\n') {
-			//printf("%c", userChoice->supportedOS[count]);
-			printf("count = %d\n", count);
-			printf("idCount = %d\n", idCount);
-			
-
-			printf("userChoice:%c\n", userChoice->supportedOS[count]);
-			
-			//load char into idString
-			
-			//if (strcmp(&userChoice->supportedOS[count], ",")== 0) {
-			test = userChoice->supportedOS[count];
-			printf("test = %c\n", test);
-			
-			if (test == '\n') printf("HOLY MOTH"); // this isnot itterating correctly
-			
-			if (test == ',') {
-				//search for using ID
-				//print information
-				//reset String
-				printf("idString:%s\n", idString);
-				printf("\n =============\n");
-				idCount = 0; // reset idCount
-			} else {
-				idString[count] = userChoice->supportedOS[count];
-
-			}
-			
-			idCount ++;
-			//count ++;
+		/*printing header*/
+		if (token != NULL){
+	 printf("\nSupported Operating Systems:\n");
+				printf("%-10s %-5s %-30s %-8s %-30s %-10s \n", "OS", "ID", "Name", "Version", "Hardware", "Release Date");
+		printf("%s\n", userChoice->supportedOS);
+		} else { // if no Id's 
+			printf("No Operating systems supported.\n");
 		}
-		//print OS
-
+		
+		/*printing all of the information*/
+	while (token != NULL) { // itterates until the string is empty	
+	
+	printingOS = findOSByID(token, os); // this Finds the OS
+        printf("%-10s ", printingOS->category);
+		printf("%-5s ", printingOS->id);
+        printf("%-30s ", printingOS->name);
+        printf("%-8s ", printingOS->version);
+        printf("%-30s ", printingOS->hardware);
+        printf("%-10s\n", printingOS->releaseDate);
+	/*itterates to the next SubString ID*/
+	token = strtok(NULL, ","); //Holy Frick thank you God; this function is soo much simplier than the code I was trying to do
+	}
+	
 		
 	return;
 	
@@ -81,32 +61,108 @@ void printProductOs (struct OS* os, struct Product* p) {
 void printProductHype (struct Hypervisor *hype, struct Product* p) {
 	
 	struct Product* userChoice = malloc(sizeof(Product)); // this is the users product choice
-	
+	struct Hypervisor* printingOS = malloc(sizeof(Hypervisor)); // This is the OS that is going to be printed
+	char supportedOss[100]; // used for strtok function to get a substring
+
 	userChoice = displayProductsUser(p); // this returns the Product Node that the user chose
+	
 	/*if user choose to skip product selection*/
 	if (userChoice == NULL) {
 	return;
 	} 
-	
-	/*printing functions here*/
-	// userChoice has the product node containing everything that nodes has to offer
+		
+	/*transfers OS Information*/
+	strcpy (supportedOss, userChoice->supportedHypervisors);
+	/*gets the first OS Id from the Os String*/
+	char* token = strtok(supportedOss, ","); 
 
+	
+		/*printing header*/
+		if (token != NULL && strcmp(token, "\r") != 0){
+	 printf("\nSupported Operating Systems:\n");
+				printf("%-10s %-5s %-30s %-8s %-30s %-10s \n", "OS", "ID", "Name", "Version", "Hardware", "Release Date");
+		printf("%s\n", userChoice->supportedHypervisors);
+		} else { // if no Id's 
+			printf("No Operating systems supported.\n");
+		}
+		
+		/*printing all of the information*/
+	while (token != NULL) { // itterates until the string is empty	
+	
+	int length = strlen(token);//FIXME debugging code
+	printf("length: %d\n", length);
+	int count = 0; //FIXMEprint as ascii
+	for (count = 0; count < length; count++){
+	int charAsInt= 0;
+	charAsInt = token[count];
+	printf("char: %c\t num:%d\n", token[count], token[count]);
+	}
+	
+	
+	/*length = strlen("HV5");
+	printf("Mlength: %d", length);*/
+	
+	printingOS = findHypervisorByID(token, hype); // this Finds the OS
+		if (printingOS != NULL) {
+		printf("%-5s ", printingOS->id);
+        printf("%-30s ", printingOS->name);
+        printf("%-8s ", printingOS->version);
+        printf("%-10s\n", printingOS->releaseDate);
+		}
+	/*itterates to the next SubString ID*/
+	token = strtok(NULL, ","); //Holy Frick thank you God; this function is soo much simplier than the code I was trying to do
+	}
+	
 		
 	return;
 }
 
 void printProductSoft (struct Software* sof, struct Product* p) {
 	
-	struct Product* userChoice = malloc(sizeof(Product)); // this is the users product choice
-	
+		struct Product* userChoice = malloc(sizeof(Product)); // this is the users product choice
+	struct Software* printingOS = malloc(sizeof(Software)); // This is the OS that is going to be printed
+	char supportedOss[100]; // used for strtok function to get a substring
+
 	userChoice = displayProductsUser(p); // this returns the Product Node that the user chose
+	
 	/*if user choose to skip product selection*/
 	if (userChoice == NULL) {
 	return;
 	} 
+		
+	/*transfers OS Information*/
+	strcpy (supportedOss, userChoice->supportedSoftware);
+	/*gets the first OS Id from the Os String*/
+	char* token = strtok(supportedOss, ","); 
+
 	
-	/*printing functions here*/
-	// userChoice has the product node containing everything that nodes has to offer
+		/*printing header*/
+		if (token != NULL){
+	 printf("\nSupported Operating Systems:\n");
+				printf("%-18s %-5s %-30s %-8s %-30s %-10s \n", "OS", "ID", "Name", "Version", "Hardware", "Release Date");
+		printf("%s\n", userChoice->supportedSoftware);
+		} else { // if no Id's 
+			printf("No Operating systems supported.\n");
+		}
+		
+		/*printing all of the information*/
+	while (token != NULL) { // itterates until the string is empty	
+	
+	printingOS = findSoftwareByID(token, sof); // this Finds the OS
+		if (printingOS != NULL) {       
+	   printf("%-18s ", printingOS->category);
+		printf("%-5s ", printingOS->id);
+        printf("%-30s ", printingOS->name);
+        printf("%-8s ", printingOS->version);
+        printf("%-10s\n", printingOS->releaseDate);
+		}
+	/*itterates to the next SubString ID*/
+	token = strtok(NULL, ","); //Holy Frick thank you God; this function is soo much simplier than the code I was trying to do
+	}
+	
+		
+	return;
+	
 
 		
 	return;

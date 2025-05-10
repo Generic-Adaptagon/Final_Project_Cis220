@@ -14,7 +14,7 @@ Product* productHead = NULL;
 Load Search function data
 =============================================================*/
 // Search functions
-OS* findOSByID(const char* id) {
+OS* findOSByID(const char* id, struct OS* osHead) {
     OS* current = osHead;
     while (current) {
         if (strcmp(current->id, id) == 0) return current;
@@ -23,21 +23,49 @@ OS* findOSByID(const char* id) {
     return NULL;
 }
 
-Software* findSoftwareByID(const char* id) {
+Software* findSoftwareByID(const char* id, struct Software* softwareHead) {
     Software* current = softwareHead;
+			
+
     while (current) {
+
         if (strcmp(current->id, id) == 0) return current;
         current = current->next;
     }
     return NULL;
 }
 
-Hypervisor* findHypervisorByID(const char* id) {
+Hypervisor* findHypervisorByID(const char* id, struct Hypervisor* hypervisorHead) {
     Hypervisor* current = hypervisorHead;
+	char otherOption[5];
     while (current) {
-        if (strcmp(current->id, id) == 0) return current;
+		/*printf("id = %s\n", current->id);
+		printf("passed inid = %s\n", id);
+	int test = 0;
+		test = strcmp(current->id, id);
+		printf("test = %d\n", test);
+		
+	int length = strlen(id);
+	printf("passed in length: %d\n", length);
+	length = strlen(current->id);
+	printf("data structure length: %d\n", length);
+			strcpy(otherOption, current->id);
+			strcat(otherOption, "\0");
+		length = strlen(otherOption);
+		printf("other option: %s length length: %d\n", otherOption, length);
+		test = 0;
+		test = strcmp(otherOption, id);
+		printf("test = %d\n", test);*/
+		
+		/*just this Hypervisor ID needs to have a second option that has a '\r' concatinated at the end. 
+		I have no idea why*/
+		strcpy(otherOption, current->id);
+			strcat(otherOption, "\r");
+
+	    if (strcmp(current->id, id) == 0 || strcmp(otherOption, id) == 0) return current;
         current = current->next;
     }
+			printf("RETURNED NUL\n");//FIXME
     return NULL;
 }
 /* =============================================================

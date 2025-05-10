@@ -53,8 +53,8 @@ void loadHypeData (const char* filename, struct Hypervisor* hypeHead);
 void loadSoftData (const char* filename, struct Software* softHead);
 void loadProductData (const char* filename, struct Product* prodHead);
 
-OS* findOSByID(const char* id);
-Software* findSoftwareByID(const char* id);
-Hypervisor* findHypervisorByID(const char* id);
+OS* findOSByID(const char* id, struct OS* osHead);
+Software* findSoftwareByID(const char* id, struct Software* softwareHead);
+Hypervisor* findHypervisorByID(const char* id, struct Hypervisor* hypervisorHead);
 
 #endif
