@@ -176,7 +176,7 @@ void printAllOs (struct OS* os) {
 	printf("%-10s %-8s %-30s %-8s %-30s %-10s \n", "OS", "ID", "Name", "Version", "Hardware", "Release Date");
 		/*printing all of the nodes*/
     while (current != NULL) {
-        printf("%-10s ", current->category);
+        printf("%-10s", current->category);
         printf("%-8s ", current->id);
         printf("%-30s ", current->name);
         printf("%-8s ", current->version);

@@ -167,7 +167,7 @@ void loadOSData (const char* filename, struct OS* osHead) { //created a load OS 
            }
 		   
            parseLine(line, "|", newOS, 0); // parsing Line os
-		   //printf("%s\n", newOS->id); //CODE PROBE
+		   printf("category loaded into Os Structure: %s\n", newOS->category); //CODE PROBE
 			lastNode->next = newOS; // links noew node to the previous node - ivan
 			lastNode = newOS; // sets the last node to the last node.
 	   }
