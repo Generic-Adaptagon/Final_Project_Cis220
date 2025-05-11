@@ -138,7 +138,7 @@ do {
 	/*dispaly Menu title and prompt user*/
 	menuDisplay("Related Software");
 	printf("1. Generate Report based on product\n");
-	printf("2. Print all Related Software\n"); 		
+	printf("2. Display all Related Software\n"); 		
 	printf("3. Exit Menu\n");
 	
 	/*user choice*/
@@ -191,7 +191,7 @@ do {
 	printf("\n"); //spacer
 	/*dispaly Menu title and prompt user*/
 	menuDisplay("Product");
-	printf("1. Print all Menu Products\n"); 
+	printf("1. Display all Menu Products\n"); 
 	printf("2. Exit Menu\n");
 	
 	/*user choice*/
@@ -240,7 +240,7 @@ do {
 	/*dispaly Menu title and prompt user*/
 	menuDisplay("OS");
 	printf("1. Generate Report based on product\n"); 
-	printf("2. Print all OS's\n"); 
+	printf("2. Display all OS's\n"); 
 	printf("3. Exit Menu\n");
 	
 	/*user choice*/
@@ -294,7 +294,7 @@ do {
 	/*dispaly Menu title and prompt user*/
 	menuDisplay("Hypervisor");
 	printf("1. Generate Report based on product\n"); 
-	printf("2. Print all Hypervisors\n"); 
+	printf("2. Display all Hypervisors\n"); 
 	printf("3. Exit Menu\n");
 	
 	/*user choice*/
