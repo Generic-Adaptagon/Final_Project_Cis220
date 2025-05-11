@@ -180,7 +180,7 @@ bool hypeOverflow = false;
 if (strlen(osString) < 40) { // same for others
 	osOverflow = false;
 		if (strlen(osString) == 0) { // same for others
-		printf("No Operating Systems");
+		printf("%-*s", 40, "No Operating Systems");
 	} else {
 		printf("%-40s ", osString);
 	}
@@ -195,7 +195,7 @@ if (strlen(softString) < 40) { // same for others
 	softOverFlow = false;
 	/*checks if string is empty*/
 	if (strlen(softString) == 0) { 
-		printf("No Software");
+		printf("%-*s", 40, "No Software");
 	} else {
 		printf("%-40s ", softString);
 	}
@@ -211,7 +211,7 @@ if (strlen(softString) < 40) { // same for others
 if (strlen(hypeString) < 40) { // same for others
 	hypeCursor = false;
 			if (strlen(hypeString) == 0) { // same for others
-		printf("No Hypervisors");
+		printf("%-*s", 40, "No Hypervisors");
 	} else {
 	printf("%-40s ", hypeString);
 	}
@@ -334,6 +334,7 @@ Printing  functions
 void printAllOs (struct OS* os) {
 	
 		    OS* current = os;
+			current = current->next;// skips head
     printf("\nAll Operating Systems:\n\n");
 		/*printing header*/
 	printf("%-10s %-8s %-30s %-8s %-30s %-10s \n", "OS", "ID", "Name", "Version", "Hardware", "Release Date");
@@ -353,6 +354,7 @@ void printAllOs (struct OS* os) {
 void printAllHype (struct Hypervisor *hype) {
 		
 		    Hypervisor* current = hype;
+			current = current->next;// skips head
     printf("\nAll Hypervisors:\n\n");
 		/*printing header*/
 	printf("%-8s %-30s %-8s %-10s \n", "ID", "Name", "Version", "Release Date");
@@ -368,6 +370,7 @@ void printAllHype (struct Hypervisor *hype) {
 void printAllSoft (struct Software* soft) {
 	
 	    Software* current = soft;
+	current = current->next;// skips head
     printf("\nAll Software:\n\n");
 		/*printing header*/
 	printf("%-15s %-8s %-40s %-10s %-10s\n", "Category", "ID", "Name", "Version", "Release Date");
@@ -384,6 +387,7 @@ void printAllSoft (struct Software* soft) {
 }
 void printAllProduct (struct Product* prod) {
      
+	 prod = prod->next;// skips dummy
 	 printf("\nAll Product:\n\n");
 		/*printing header*/
     printf("%-4s %-47s %-8s %-40s %-40s %-40s\n", 
