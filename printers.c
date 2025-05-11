@@ -195,7 +195,7 @@ if (strlen(softString) < 40) { // same for others
 	softOverFlow = false;
 	/*checks if string is empty*/
 	if (strlen(softString) == 0) { 
-		printf("%-*s", 40, "No Software");
+		printf("%-*s", 41, "No Software");
 	} else {
 		printf("%-40s ", softString);
 	}

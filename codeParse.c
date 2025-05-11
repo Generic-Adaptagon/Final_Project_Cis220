@@ -76,71 +76,71 @@ void parseLine(char* line, const char* delimiter, void* item, int type) {
    char* token = strtok(line, delimiter);
    if (type == 0) {  // OS
        OS* newOS = (OS*)item;
-	   strncpy(newOS->category, token ? token : "", sizeof(newOS->category)); // WIP added new "category" for later report printing -LM
+	   if (strcmp(token, "?")  != 0) strncpy(newOS->category, token ? token : "", sizeof(newOS->category)); // WIP added new "category" for later report printing -LM
 	   
 	   token = strtok(NULL, delimiter);
-       strncpy(newOS->id, token ? token : "", sizeof(newOS->id));
+       if (strcmp(token, "?")  != 0)  strncpy(newOS->id, token ? token : "", sizeof(newOS->id));
 
        token = strtok(NULL, delimiter);
-       strncpy(newOS->name, token ? token : "", sizeof(newOS->name));
+       if (strcmp(token, "?")  != 0)  strncpy(newOS->name, token ? token : "", sizeof(newOS->name));
 
        token = strtok(NULL, delimiter);
-       strncpy(newOS->version, token ? token : "", sizeof(newOS->version));
+       if (strcmp(token, "?")  != 0)  strncpy(newOS->version, token ? token : "", sizeof(newOS->version));
 
        token = strtok(NULL, delimiter);
-       strncpy(newOS->hardware, token ? token : "", sizeof(newOS->hardware));
+       if (strcmp(token, "?")  != 0)  strncpy(newOS->hardware, token ? token : "", sizeof(newOS->hardware));
 
        token = strtok(NULL, delimiter);
-       strncpy(newOS->releaseDate, token ? token : "", sizeof(newOS->releaseDate));
+       if (strcmp(token, "?")  != 0)  strncpy(newOS->releaseDate, token ? token : "", sizeof(newOS->releaseDate));
    }
    else if (type == 1) {  // Hypervisor
        Hypervisor* newHV = (Hypervisor*)item;
-       strncpy(newHV->id, token ? token : "", sizeof(newHV->id));
+       if (strcmp(token, "?")  != 0) strncpy(newHV->id, token ? token : "", sizeof(newHV->id));
 
        token = strtok(NULL, delimiter);
-       strncpy(newHV->name, token ? token : "", sizeof(newHV->name));
+       if (strcmp(token, "?")  != 0) strncpy(newHV->name, token ? token : "", sizeof(newHV->name));
 
        token = strtok(NULL, delimiter);
-       strncpy(newHV->version, token ? token : "", sizeof(newHV->version));
+       if (strcmp(token, "?")  != 0) strncpy(newHV->version, token ? token : "", sizeof(newHV->version));
 
        token = strtok(NULL, delimiter);
-       strncpy(newHV->releaseDate, token ? token : "", sizeof(newHV->releaseDate));
+       if (strcmp(token, "?")  != 0) strncpy(newHV->releaseDate, token ? token : "", sizeof(newHV->releaseDate));
    }
    else if (type == 2) {  // Software
        Software* newSoftware = (Software*)item;
       
-	  strncpy(newSoftware->category, token ? token : "", sizeof(newSoftware->category)); // added missing printing data - Ivan
+	  if (strcmp(token, "?")  != 0) strncpy(newSoftware->category, token ? token : "", sizeof(newSoftware->category)); // added missing printing data - Ivan
 	   
 	  token = strtok(NULL, delimiter);
-	   strncpy(newSoftware->id, token ? token : "", sizeof(newSoftware->id));
+	   if (strcmp(token, "?")  != 0) strncpy(newSoftware->id, token ? token : "", sizeof(newSoftware->id));
 
        token = strtok(NULL, delimiter);
-       strncpy(newSoftware->name, token ? token : "", sizeof(newSoftware->name));
+       if (strcmp(token, "?")  != 0) strncpy(newSoftware->name, token ? token : "", sizeof(newSoftware->name));
 
        token = strtok(NULL, delimiter);
-       strncpy(newSoftware->version, token ? token : "", sizeof(newSoftware->version));
+       if (strcmp(token, "?")  != 0) strncpy(newSoftware->version, token ? token : "", sizeof(newSoftware->version));
 
        token = strtok(NULL, delimiter);
-       strncpy(newSoftware->releaseDate, token ? token : "", sizeof(newSoftware->releaseDate));
+       if (strcmp(token, "?")  != 0) strncpy(newSoftware->releaseDate, token ? token : "", sizeof(newSoftware->releaseDate));
    }
    else if (type == 3) {  // Product
        Product* newProduct = (Product*)item;
-       strncpy(newProduct->id, token ? token : "", sizeof(newProduct->id));
+       if (strcmp(token, "?")  != 0)  strncpy(newProduct->id, token ? token : "", sizeof(newProduct->id));
 
        token = strtok(NULL, delimiter);
-       strncpy(newProduct->name, token ? token : "", sizeof(newProduct->name));
+       if (strcmp(token, "?")  != 0)  strncpy(newProduct->name, token ? token : "", sizeof(newProduct->name));
 
        token = strtok(NULL, delimiter);
-       strncpy(newProduct->version, token ? token : "", sizeof(newProduct->version));
+       if (strcmp(token, "?")  != 0)  strncpy(newProduct->version, token ? token : "", sizeof(newProduct->version));
 
        token = strtok(NULL, delimiter);
-       strncpy(newProduct->supportedOS, token ? token : "", sizeof(newProduct->supportedOS));
+       if (strcmp(token, "?")  != 0)  strncpy(newProduct->supportedOS, token ? token : "", sizeof(newProduct->supportedOS));
 
        token = strtok(NULL, delimiter);
-       strncpy(newProduct->supportedSoftware, token ? token : "", sizeof(newProduct->supportedSoftware));
+       if (strcmp(token, "?")  != 0)  strncpy(newProduct->supportedSoftware, token ? token : "", sizeof(newProduct->supportedSoftware));
 
        token = strtok(NULL, delimiter);
-       strncpy(newProduct->supportedHypervisors, token ? token : "", sizeof(newProduct->supportedHypervisors));
+       if (strcmp(token, "?")  != 0)  strncpy(newProduct->supportedHypervisors, token ? token : "", sizeof(newProduct->supportedHypervisors));
    }
 }
 /* =============================================================
