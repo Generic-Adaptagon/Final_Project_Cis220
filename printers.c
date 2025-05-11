@@ -83,11 +83,11 @@ void printProductHype (struct Hypervisor *hype, struct Product* p) {
 	
 		/*printing header*/
 		if (token != NULL && strcmp(token, "\r") != 0){
-	 printf("\nSupported Operating Systems:\n");
+	 printf("\nSupported Hypervisors:\n");
 				printf("%-5s %-30s %-8s %-10s \n",  "ID", "Name", "Version", "Release Date");
 		printf("%s\n", userChoice->supportedHypervisors);
 		} else { // if no Id's 
-			printf("No Operating systems supported.\n");
+			printf("No Hypervisors supported.\n");
 		}
 		
 		/*printing all of the information*/
@@ -101,6 +101,7 @@ void printProductHype (struct Hypervisor *hype, struct Product* p) {
 	charAsInt = token[count];
 	printf("char: %c\t num:%d\n", token[count], token[count]);
 	}*/
+	token[strcspn(token, "\r\n")] = 0;
 	
 	printingHype = findHypervisorByID(token, hype); // this Finds the Hypervisor
 		if (printingHype != NULL) {
