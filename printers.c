@@ -34,8 +34,8 @@ void printProductOs (struct OS* os, struct Product* p) {
 		/*printing header*/
 		if (token != NULL){
 	 printf("\nSupported Operating Systems:\n");
-				printf("%-10s %-5s %-30s %-8s %-30s %-10s \n", "OS", "ID", "Name", "Version", "Hardware", "Release Date");
-		printf("%s\n", userChoice->supportedOS);
+				printf("%-10s %-5s %-30s %-8s %-30s %-10s \n", 
+				"OS", "ID", "Name", "Version", "Hardware", "Release Date");
 		} else { // if no Id's 
 			printf("No Operating systems supported.\n");
 		}
@@ -85,7 +85,6 @@ void printProductHype (struct Hypervisor *hype, struct Product* p) {
 		if (token != NULL && strcmp(token, "\r") != 0){
 	 printf("\nSupported Hypervisors:\n");
 				printf("%-5s %-30s %-8s %-10s \n",  "ID", "Name", "Version", "Release Date");
-		printf("%s\n", userChoice->supportedHypervisors);
 		} else { // if no Id's 
 			printf("No Hypervisors supported.\n");
 		}
@@ -139,9 +138,8 @@ void printProductSoft (struct Software* sof, struct Product* p) {
 	
 		/*printing header*/
 		if (token != NULL){
-	 printf("\nSupported Operating Systems:\n");
-				printf("%-18s %-5s %-30s %-8s  %-10s \n", "OS", "ID", "Name", "Version",  "Release Date");
-		printf("%s\n", userChoice->supportedSoftware);
+	 printf("\nSupported Related Software:\n");
+				printf("%-18s %-5s %-50s %-8s  %-10s \n", "OS", "ID", "Name", "Version",  "Release Date");
 		} else { // if no Id's 
 			printf("No Operating systems supported.\n");
 		}
@@ -153,7 +151,7 @@ void printProductSoft (struct Software* sof, struct Product* p) {
 		if (printingSoft != NULL) {       
 	   printf("%-18s ", printingSoft->category);
 		printf("%-5s ", printingSoft->id);
-        printf("%-30s ", printingSoft->name);
+        printf("%-50s ", printingSoft->name);
         printf("%-8s ", printingSoft->version);
         printf("%-10s\n", printingSoft->releaseDate);
 		} else {printf("Something went wrong\n");}
@@ -290,40 +288,7 @@ test = strlen(temp);
 
 printf("\n");// REPLACE AFTER HYPERVISORS
 }
-	/*
-assume function (osString, softString, hypeString) 
-osCursor = 0;
-softCursor = 0;
-hypeCursor = 0;
-osOverflow = false
-softOverFlow = false
-hypeOverflow = false
-
-if (strlen(string) < 40) { // same for others
-	osOverflow = false;
-	//print string
-} else {
-	osOverflow = true;
-	print only 39 add "-"
-	cursor = 39;
-}
-
-
-while (osOverflow == true || softOverFlow == true ||hypeOverflow == true)
-
-
-If (overflow == true) {// same for others
-	//test of still overflowing
-	if (strlen(String) < cursor + 39) {
-		//print rest
-	} else {
-		//print only 39 add "-"	
-		//cursor += 39;
-	}
-} else {
-	//print spacing
-}
-*/
+	
 	
 }
 
