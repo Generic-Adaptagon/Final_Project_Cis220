@@ -179,7 +179,11 @@ bool hypeOverflow = false;
 
 if (strlen(osString) < 40) { // same for others
 	osOverflow = false;
-	printf("%-40s ", osString);
+		if (strlen(osString) == 0) { // same for others
+		printf("No Operating Systems");
+	} else {
+		printf("%-40s ", osString);
+	}
 } else {
 	osOverflow = true;
 	printf("%-.39s", osString);
@@ -189,7 +193,12 @@ if (strlen(osString) < 40) { // same for others
 
 if (strlen(softString) < 40) { // same for others
 	softOverFlow = false;
-	printf("%-40s ", softString);
+	/*checks if string is empty*/
+	if (strlen(softString) == 0) { 
+		printf("No Software");
+	} else {
+		printf("%-40s ", softString);
+	}
 } else {
 	softOverFlow = true;
 	printf("%-.39s", softString);
@@ -197,9 +206,15 @@ if (strlen(softString) < 40) { // same for others
 	softCursor = 39;
 }
 
+
+
 if (strlen(hypeString) < 40) { // same for others
 	hypeCursor = false;
+			if (strlen(hypeString) == 0) { // same for others
+		printf("No Hypervisors");
+	} else {
 	printf("%-40s ", hypeString);
+	}
 } else {
 	hypeCursor = true;
 	printf("%-.39s", hypeString);
@@ -208,17 +223,6 @@ if (strlen(hypeString) < 40) { // same for others
 }
 	//FIXME Replace with if statment from above
       printf("\n");
-	  
-/*if (strlen(osString) > 40) { // same for others
-
-char temp[1000] = {0}; 
-strcpy(temp, osString + osCursor);
-int length = strlen(temp);
-printf("\t\tlength: %d String:%s \n", length, temp);
-length = strlen(osString);
-printf("\t\t\tstring length: %d String: %s\n", length, osString + osCursor);
-
-}*/
 
 
 while (osOverflow == true || softOverFlow == true ||hypeOverflow == true){
@@ -281,7 +285,7 @@ test = strlen(temp);
 		hypeCursor += 39;
 	}
 } else {
-	printf("%-62s%*s ", "  ", 40, " ");
+	//printf("%*s ", 40, " ");
 }
 
 printf("\n");// REPLACE AFTER HYPERVISORS
