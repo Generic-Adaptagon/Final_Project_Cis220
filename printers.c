@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include<string.h>
+#include <stdbool.h>
 #include "codeParse.h"
 #include "displayProductsUser.h"
 
@@ -164,6 +165,163 @@ void printProductSoft (struct Software* sof, struct Product* p) {
 
 }
 
+
+void overflowPrint (char* osString, char* softString, char* hypeString) {
+
+int osCursor = 0;
+int softCursor = 0;
+int hypeCursor = 0;
+bool osOverflow = false;
+bool softOverFlow = false;
+bool hypeOverflow = false;
+
+
+if (strlen(osString) < 40) { // same for others
+	osOverflow = false;
+	printf("%-40s ", osString);
+} else {
+	osOverflow = true;
+	printf("%-.39s", osString);
+	printf("- ");
+	osCursor = 39;
+}
+
+if (strlen(softString) < 40) { // same for others
+	softOverFlow = false;
+	printf("%-40s ", softString);
+} else {
+	softOverFlow = true;
+	printf("%-.39s", softString);
+	printf("- ");
+	softCursor = 39;
+}
+
+if (strlen(hypeString) < 40) { // same for others
+	hypeCursor = false;
+	printf("%-40s ", hypeString);
+} else {
+	hypeCursor = true;
+	printf("%-.39s", hypeString);
+	printf("- ");
+	hypeCursor = 39;
+}
+	//FIXME Replace with if statment from above
+      printf("\n");
+	  
+/*if (strlen(osString) > 40) { // same for others
+
+char temp[1000] = {0}; 
+strcpy(temp, osString + osCursor);
+int length = strlen(temp);
+printf("\t\tlength: %d String:%s \n", length, temp);
+length = strlen(osString);
+printf("\t\t\tstring length: %d String: %s\n", length, osString + osCursor);
+
+}*/
+
+
+while (osOverflow == true || softOverFlow == true ||hypeOverflow == true){
+	
+if (osOverflow == true) {// same for others
+	//test of still overflowing
+char temp[1000] = {0}; 
+int test = 0;
+
+strcpy(temp, osString + osCursor);
+test = strlen(temp);
+
+	if ( test < osCursor + 39) {
+		printf("%*s%-40s ", 62, " ", osString + osCursor);
+		osOverflow = false;
+	} else {
+		printf("%-.39s", osString);
+		printf("- ");
+		osCursor += 39;
+	}
+} else {
+	printf("%-62s%*s ", "  ", 40, " ");
+}
+
+if (softOverFlow == true) {// same for others
+	//test of still overflowing
+char temp[1000] = {0}; 
+int test = 0;
+
+strcpy(temp, softString + softCursor);
+test = strlen(temp);
+
+	if ( test < softCursor + 39) {
+		printf("%-40s ", softString + softCursor);
+		softOverFlow = false;
+	} else {
+		printf("%-.39s thisone", softString + softCursor);
+		printf("- ");
+		softCursor += 39;
+	}
+} else {
+	printf("%-40s ", "  ");
+}
+
+
+if (hypeOverflow == true) {// same for others
+	//test of still overflowing
+char temp[1000] = {0}; 
+int test = 0;
+
+strcpy(temp, hypeString + hypeCursor);
+test = strlen(temp);
+
+	if ( test < hypeCursor + 39) {
+		printf("%*s%-40s ", 62, " ", hypeString + hypeCursor);
+		hypeOverflow = false;
+	} else {
+		printf("%-.39s", hypeString);
+		printf("- ");
+		hypeCursor += 39;
+	}
+} else {
+	printf("%-62s%*s ", "  ", 40, " ");
+}
+
+printf("\n");// REPLACE AFTER HYPERVISORS
+}
+	/*
+assume function (osString, softString, hypeString) 
+osCursor = 0;
+softCursor = 0;
+hypeCursor = 0;
+osOverflow = false
+softOverFlow = false
+hypeOverflow = false
+
+if (strlen(string) < 40) { // same for others
+	osOverflow = false;
+	//print string
+} else {
+	osOverflow = true;
+	print only 39 add "-"
+	cursor = 39;
+}
+
+
+while (osOverflow == true || softOverFlow == true ||hypeOverflow == true)
+
+
+If (overflow == true) {// same for others
+	//test of still overflowing
+	if (strlen(String) < cursor + 39) {
+		//print rest
+	} else {
+		//print only 39 add "-"	
+		//cursor += 39;
+	}
+} else {
+	//print spacing
+}
+*/
+	
+}
+
 /* =============================================================
 Printing  functions
 	// prints all the node
@@ -176,7 +334,7 @@ void printAllOs (struct OS* os) {
 	printf("%-10s %-8s %-30s %-8s %-30s %-10s \n", "OS", "ID", "Name", "Version", "Hardware", "Release Date");
 		/*printing all of the nodes*/
     while (current != NULL) {
-        printf("%-10s", current->category);
+        printf("%-10s ", current->category);
         printf("%-8s ", current->id);
         printf("%-30s ", current->name);
         printf("%-8s ", current->version);
@@ -223,16 +381,17 @@ void printAllProduct (struct Product* prod) {
      
 	 printf("\nAll Product:\n\n");
 		/*printing header*/
-    printf("%-3s %-47s %-8s %-70s %-61s %s\n", 
+    printf("%-4s %-47s %-8s %-40s %-40s %-40s\n", 
 	"ID", "Name", "Version",  "Supported OS ID's", "Supported Software ID's", "Supported Hypervisors ID's");
 		/*printing all of the nodes*/
         while (prod != NULL) {
         printf("%-4s ", prod->id);
         printf("%-47s ", prod->name);
         printf("%-8s ", prod->version);
-        printf("%-70s ", prod->supportedOS);
+		overflowPrint(prod->supportedOS, prod->supportedSoftware, prod->supportedHypervisors);
+        /*printf("%-70s ", prod->supportedOS);
         printf("%-61s ", prod->supportedSoftware);
-        printf("%s\n", prod->supportedHypervisors);
+        printf("%s\n", prod->supportedHypervisors);*/
     prod = prod->next;// itterates to next
     }
 }
