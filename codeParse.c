@@ -157,7 +157,7 @@ void loadOSData (const char* filename, struct OS* osHead) { //created a load OS 
    char line[MAX_LINE_LENGTH];
    fgets(line, sizeof(line), file); // gets the Header
    while (fgets(line, sizeof(line), file)) {
-       line[strcspn(line, "\n")] = 0;  // Remove newline
+       line[strcspn(line, "\r\n")] = 0;  // Remove newline
 
            OS* newOS = malloc(sizeof(OS));
            if (!newOS) {
@@ -188,7 +188,7 @@ void loadHypeData (const char* filename, struct Hypervisor* hypeHead) { //create
 		fgets(line, sizeof(line), file); 
 
    while (fgets(line, sizeof(line), file)) {
-       line[strcspn(line, "\n")] = 0;  // Remove newline
+       line[strcspn(line, "\r\n")] = 0;  // Remove newline
 
            Hypervisor* newHype = malloc(sizeof(Hypervisor));
            if (!newHype) {
@@ -217,7 +217,7 @@ void loadSoftData (const char* filename, struct Software* softHead) { //created 
 		char line[MAX_LINE_LENGTH];
 		fgets(line, sizeof(line), file);
    while (fgets(line, sizeof(line), file)) {
-       line[strcspn(line, "\n")] = 0;  // Remove newline
+       line[strcspn(line, "\r\n")] = 0;  // Remove newline
 
            Software* newSoft= malloc(sizeof(Software));
            if (!newSoft) {
@@ -246,7 +246,7 @@ void loadProductData (const char* filename, struct Product* prodHead) { //create
 		char line[MAX_LINE_LENGTH];
 		fgets(line, sizeof(line), file);
    while (fgets(line, sizeof(line), file)) {
-       line[strcspn(line, "\n")] = 0;  // Remove newline
+       line[strcspn(line, "\r\n")] = 0;  // Remove newline
 
            Product* newProd = malloc(sizeof(Product));
            if (!newProd) {
