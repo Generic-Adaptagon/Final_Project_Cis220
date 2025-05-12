@@ -92,14 +92,6 @@ void printProductHype (struct Hypervisor *hype, struct Product* p) {
 		/*printing all of the information*/
 	while (token != NULL) { // itterates until the string is empty	
 	
-	/*int length = strlen(token);//FIXME debugging code
-	printf("length: %d\n", length);
-	int count = 0; //FIXMEprint as ascii
-	for (count = 0; count < length; count++){
-	int charAsInt= 0;
-	charAsInt = token[count];
-	printf("char: %c\t num:%d\n", token[count], token[count]);
-	}*/
 	token[strcspn(token, "\r\n")] = 0;
 	
 	printingHype = findHypervisorByID(token, hype); // this Finds the Hypervisor
@@ -174,30 +166,31 @@ bool osOverflow = false;
 bool softOverFlow = false;
 bool hypeOverflow = false;
 
-
-if (strlen(osString) < 40) { // same for others
+/*determines of the software string is over the text wrap amount*/
+if (strlen(osString) < 40) { 
 	osOverflow = false;
-		if (strlen(osString) == 0) { // same for others
+		if (strlen(osString) == 0) { 
 		printf("%-*s", 40, "No Operating Systems");
 	} else {
 		printf("%-40s ", osString);
 	}
-} else {
+} else { // if does over flow print until overflow limit and put cursor at overflow limit to print rest later
 	osOverflow = true;
 	printf("%-.39s", osString);
 	printf("- ");
 	osCursor = 39;
 }
 
-if (strlen(softString) < 40) { // same for others
+/*determines of the software string is over the text wrap amount*/
+if (strlen(softString) < 40) { 
 	softOverFlow = false;
-	/*checks if string is empty*/
+	/*checks if string is empty; if it is print data empt; if not print*/
 	if (strlen(softString) == 0) { 
 		printf("%-*s", 41, "No Software");
 	} else {
 		printf("%-40s ", softString);
 	}
-} else {
+} else { // if does over flow print until overflow limit and put cursor at overflow limit to print rest later
 	softOverFlow = true;
 	printf("%-.39s", softString);
 	printf("- ");
@@ -205,88 +198,84 @@ if (strlen(softString) < 40) { // same for others
 }
 
 
-
-if (strlen(hypeString) < 40) { // same for others
+/*determines of the software string is over the text wrap amount*/
+if (strlen(hypeString) < 40) { 
 	hypeCursor = false;
-			if (strlen(hypeString) == 0) { // same for others
+			if (strlen(hypeString) == 0) { 
 		printf("%-*s", 40, "No Hypervisors");
 	} else {
 	printf("%-40s ", hypeString);
 	}
-} else {
+} else { // if does over flow print until overflow limit and put cursor at overflow limit to print rest later
 	hypeCursor = true;
 	printf("%-.39s", hypeString);
 	printf("- ");
 	hypeCursor = 39;
 }
-	//FIXME Replace with if statment from above
-      printf("\n");
+      printf("\n"); // end first row
 
-
+/*print even if one overflows*/
 while (osOverflow == true || softOverFlow == true ||hypeOverflow == true){
 	
-if (osOverflow == true) {// same for others
-	//test of still overflowing
-char temp[1000] = {0}; 
-int test = 0;
+if (osOverflow == true) { // if operating system overflows
+char temp[1000] = {0}; // for sub string stuff
+int test = 0; //for comparison later
 
 strcpy(temp, osString + osCursor);
 test = strlen(temp);
 
-	if ( test < osCursor + 39) {
-		printf("%*s%-40s ", 62, " ", osString + osCursor);
+	if ( test < osCursor + 39) { // if test string is greater than current cursor place + the next wrap text length
+		printf("%*s%-40s ", 62, " ", osString + osCursor); //print string as normal with spacing
 		osOverflow = false;
 	} else {
-		printf("%-.39s", osString);
+		printf("%-.39s", osString); // print only to the wrap limit
 		printf("- ");
-		osCursor += 39;
+		osCursor += 39; // update cursor spot
 	}
-} else {
+} else { // it OS not overflowing just print spacing
 	printf("%-62s%*s ", "  ", 40, " ");
 }
 
-if (softOverFlow == true) {// same for others
-	//test of still overflowing
-char temp[1000] = {0}; 
-int test = 0;
+if (softOverFlow == true) {
+char temp[1000] = {0}; // for sub string stuff
+int test = 0; //for comparison later
 
 strcpy(temp, softString + softCursor);
 test = strlen(temp);
 
-	if ( test < softCursor + 39) {
-		printf("%-40s ", softString + softCursor);
+	if ( test < softCursor + 39) { // if test string is greater than current cursor place + the next wrap text length
+		printf("%-40s ", softString + softCursor); //print string as normal
 		softOverFlow = false;
 	} else {
-		printf("%-.39s thisone", softString + softCursor);
+		printf("%-.39s", softString + softCursor); // print only to the wrap limit
 		printf("- ");
 		softCursor += 39;
 	}
-} else {
+} else { // if Software not overflowing just print spacing
 	printf("%-40s ", "  ");
 }
 
 
-if (hypeOverflow == true) {// same for others
-	//test of still overflowing
-char temp[1000] = {0}; 
-int test = 0;
+if (hypeOverflow == true) {
+char temp[1000] = {0}; // for sub string stuff
+int test = 0; //for comparison later
 
 strcpy(temp, hypeString + hypeCursor);
 test = strlen(temp);
 
-	if ( test < hypeCursor + 39) {
-		printf("%*s%-40s ", 62, " ", hypeString + hypeCursor);
+	if ( test < hypeCursor + 39) { // if test string is greater than current cursor place + the next wrap text length
+		printf("%-40s ", hypeString + hypeCursor); //print string
 		hypeOverflow = false;
 	} else {
-		printf("%-.39s", hypeString);
+		printf("%-.39s", hypeString); // print up to limit
 		printf("- ");
-		hypeCursor += 39;
+		hypeCursor += 39; // update cursor position
 	}
-} else {
-	//printf("%*s ", 40, " ");
+} else {// if Software not overflowing just print spacing
+	printf("%-40s ", "  ");
 }
 
-printf("\n");// REPLACE AFTER HYPERVISORS
+printf("\n");// end of row
 }
 	
 	
@@ -353,7 +342,7 @@ void printAllSoft (struct Software* soft) {
 void printAllProduct (struct Product* prod) {
      
 	 prod = prod->next;// skips dummy
-	 printf("\nAll Product:\n\n");
+	 printf("\nAll Products:\n\n");
 		/*printing header*/
     printf("%-4s %-47s %-8s %-40s %-40s %-40s\n", 
 	"ID", "Name", "Version",  "Supported OS ID's", "Supported Software ID's", "Supported Hypervisors ID's");
@@ -363,9 +352,6 @@ void printAllProduct (struct Product* prod) {
         printf("%-47s ", prod->name);
         printf("%-8s ", prod->version);
 		overflowPrint(prod->supportedOS, prod->supportedSoftware, prod->supportedHypervisors);
-        /*printf("%-70s ", prod->supportedOS);
-        printf("%-61s ", prod->supportedSoftware);
-        printf("%s\n", prod->supportedHypervisors);*/
     prod = prod->next;// itterates to next
     }
 }

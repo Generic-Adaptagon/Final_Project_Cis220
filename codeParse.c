@@ -25,8 +25,8 @@ OS* findOSByID(const char* id, struct OS* osHead) {
 
 Software* findSoftwareByID(const char* id, struct Software* softwareHead) {
     Software* current = softwareHead;
-			
-
+		
+	/*loop through all nodes*/
     while (current) {
 
         if (strcmp(current->id, id) == 0) return current;
@@ -39,23 +39,6 @@ Hypervisor* findHypervisorByID(const char* id, struct Hypervisor* hypervisorHead
     Hypervisor* current = hypervisorHead;
 	char otherOption[5];
     while (current) {
-		/*printf("id = %s\n", current->id);
-		printf("passed inid = %s\n", id);
-	int test = 0;
-		test = strcmp(current->id, id);
-		printf("test = %d\n", test);
-		
-	int length = strlen(id);
-	printf("passed in length: %d\n", length);
-	length = strlen(current->id);
-	printf("data structure length: %d\n", length);
-			strcpy(otherOption, current->id);
-			strcat(otherOption, "\0");
-		length = strlen(otherOption);
-		printf("other option: %s length length: %d\n", otherOption, length);
-		test = 0;
-		test = strcmp(otherOption, id);
-		printf("test = %d\n", test);*/
 		
 		/*just this Hypervisor ID needs to have a second option that has a '\r' concatinated at the end. 
 		I have no idea why*/
@@ -73,9 +56,10 @@ Parses lines
 =============================================================*/
 // Function to parse a line and store the data in the appropriate linked list
 void parseLine(char* line, const char* delimiter, void* item, int type) {
-   char* token = strtok(line, delimiter);
+   char* token = strtok(line, delimiter); // sets the token to the first section of the string
    if (type == 0) {  // OS
-       OS* newOS = (OS*)item;
+       OS* newOS = (OS*)item;  // casts proper structure
+	   /*for all of these, it will only load data if the data is not "?". "?" is the character for no data*/
 	   if (strcmp(token, "?")  != 0) strncpy(newOS->category, token ? token : "", sizeof(newOS->category)); // WIP added new "category" for later report printing -LM
 	   
 	   token = strtok(NULL, delimiter);
@@ -94,7 +78,8 @@ void parseLine(char* line, const char* delimiter, void* item, int type) {
        if (strcmp(token, "?")  != 0)  strncpy(newOS->releaseDate, token ? token : "", sizeof(newOS->releaseDate));
    }
    else if (type == 1) {  // Hypervisor
-       Hypervisor* newHV = (Hypervisor*)item;
+       Hypervisor* newHV = (Hypervisor*)item; // casts proper structure
+	   /*for all of these, it will only load data if the data is not "?"*/
        if (strcmp(token, "?")  != 0) strncpy(newHV->id, token ? token : "", sizeof(newHV->id));
 
        token = strtok(NULL, delimiter);
@@ -107,8 +92,8 @@ void parseLine(char* line, const char* delimiter, void* item, int type) {
        if (strcmp(token, "?")  != 0) strncpy(newHV->releaseDate, token ? token : "", sizeof(newHV->releaseDate));
    }
    else if (type == 2) {  // Software
-       Software* newSoftware = (Software*)item;
-      
+       Software* newSoftware = (Software*)item; // casts proper structure
+      /*for all of these, it will only load data if the data is not "?"*/
 	  if (strcmp(token, "?")  != 0) strncpy(newSoftware->category, token ? token : "", sizeof(newSoftware->category)); // added missing printing data - Ivan
 	   
 	  token = strtok(NULL, delimiter);
@@ -124,7 +109,8 @@ void parseLine(char* line, const char* delimiter, void* item, int type) {
        if (strcmp(token, "?")  != 0) strncpy(newSoftware->releaseDate, token ? token : "", sizeof(newSoftware->releaseDate));
    }
    else if (type == 3) {  // Product
-       Product* newProduct = (Product*)item;
+       Product* newProduct = (Product*)item; // casts proper structure
+	   /*for all of these, it will only load data if the data is not "?"*/
        if (strcmp(token, "?")  != 0)  strncpy(newProduct->id, token ? token : "", sizeof(newProduct->id));
 
        token = strtok(NULL, delimiter);
@@ -147,29 +133,29 @@ void parseLine(char* line, const char* delimiter, void* item, int type) {
 Load OS data
 =============================================================*/
 void loadOSData (const char* filename, struct OS* osHead) { //created a load OS specific structure -ivan
-	 FILE* file = fopen(filename, "r");
-   if (!file) {
-       perror("Failed to open file");
+	/*opens file and throws error if not able to open*/
+	 FILE* file = fopen(filename, "r"); 
+   if (!file) { 
+       perror("Failed to open file \"operating_systems.txt\"");
        return;
    }
-	//OS* NodeHead = osHead;
+	
 	OS* lastNode = osHead; // set the last node to header so function can add to this node -ivan
    char line[MAX_LINE_LENGTH];
    fgets(line, sizeof(line), file); // gets the Header
    while (fgets(line, sizeof(line), file)) {
        line[strcspn(line, "\r\n")] = 0;  // Remove newline
 
-           OS* newOS = malloc(sizeof(OS));
+           OS* newOS = malloc(sizeof(OS)); // new header + error
            if (!newOS) {
                perror("Memory allocation failed");
                fclose(file);
                return;
            }
-		   
-           parseLine(line, "|", newOS, 0); // parsing Line os
-		   //printf("category loaded into Os Structure: %s\n", newOS->category); //CODE PROBE
-			lastNode->next = newOS; // links noew node to the previous node - ivan
-			lastNode = newOS; // sets the last node to the last node.
+		   /*parsing data + linked list linking*/
+           parseLine(line, "|", newOS, 0); 
+			lastNode->next = newOS; 
+			lastNode = newOS; 
 	   }
    fclose(file);
 }// loadOSData
@@ -177,9 +163,10 @@ void loadOSData (const char* filename, struct OS* osHead) { //created a load OS 
 Load Hypervisor data
 =============================================================*/
 void loadHypeData (const char* filename, struct Hypervisor* hypeHead) { //created a load Hypervisor specific structure -ivan
+	/*opens filel and throws error if not able to open*/
 	 FILE* file = fopen(filename, "r");
    if (!file) {
-       perror("Failed to open file");
+       perror("Failed to open file \"hypervisors.txt\"");
        return;
    }
 
@@ -196,9 +183,10 @@ void loadHypeData (const char* filename, struct Hypervisor* hypeHead) { //create
                fclose(file);
                return;
            }
-           parseLine(line, "|", newHype, 1); // parsing Line os
-			lastNode->next = newHype; // links noew node to the previous node - ivan
-			lastNode = newHype; // sets the last node to the last node.
+		   /*parsing data + linked list linking*/
+           parseLine(line, "|", newHype, 1);
+			lastNode->next = newHype; 
+			lastNode = newHype; 
 			
    }
    fclose(file);
@@ -207,9 +195,10 @@ void loadHypeData (const char* filename, struct Hypervisor* hypeHead) { //create
 Load Software data
 =============================================================*/
 void loadSoftData (const char* filename, struct Software* softHead) { //created a load Software specific structure -ivan
+	 /*opens filel and throws error if not able to open*/
 	 FILE* file = fopen(filename, "r");
    if (!file) {
-       perror("Failed to open file");
+       perror("Failed to open file \"related_software.txt\"");
        return;
    }
 
@@ -225,9 +214,10 @@ void loadSoftData (const char* filename, struct Software* softHead) { //created 
                fclose(file);
                return;
            }
-           parseLine(line, "|", newSoft, 2); // parsing lines
-			lastNode->next = newSoft; // links new node to the previous node - ivan
-			lastNode = newSoft; // sets the last node to the last node.
+		   /*parsing data + linked list linking*/
+           parseLine(line, "|", newSoft, 2); 
+			lastNode->next = newSoft; 
+			lastNode = newSoft; 
    }
    fclose(file);
 }// loadSoftData
@@ -236,9 +226,10 @@ void loadSoftData (const char* filename, struct Software* softHead) { //created 
 Load product data
 =============================================================*/
 void loadProductData (const char* filename, struct Product* prodHead) { //created a load Product specific structure -ivan
+	 /*opens filel and throws error if not able to open*/
 	 FILE* file = fopen(filename, "r");
    if (!file) {
-       perror("Failed to open file");
+       perror("Failed to open file \"products.txt\"");
        return;
    }
 
@@ -254,15 +245,16 @@ void loadProductData (const char* filename, struct Product* prodHead) { //create
                fclose(file);
                return;
            }
-           parseLine(line, "|", newProd, 3); // parsing lines
-			lastNode->next = newProd; // links to the end of the list - Ivan  
-			lastNode = newProd; // sets the last node to the last node.
+			/*parsing data + linked list linking*/
+           parseLine(line, "|", newProd, 3); 
+			lastNode->next = newProd; 
+			lastNode = newProd; 
 		}
    fclose(file);
 }// loadSoftData
 
 // Function to load category data into linked lists
-//Function Retired by Ivan, reason: made specific ones for each data type
+//Function Retired by Ivan, reason: made specific ones for each data type (note 5-12-25; by the time I realised you could pass in as void and cast it was too late to change)
 /*void loadData(const char* filename, int type) {
    FILE* file = fopen(filename, "r");
    if (!file) {

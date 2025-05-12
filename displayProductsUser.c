@@ -71,17 +71,12 @@ struct Product* displayProductsUser(struct Product* p) {
 	if (check == NULL) { // if errors
 		do {
 			flush_input( );
-			
+			/*display error message*/
 			printf("\n---------------------------------------------------------------\n\nUh oh! Invalid ID.\n\nPlease enter 'P' and the number of product choice ~ Example:[P1]\nIf you wish to exit type \"exit\"\n");
-			// printf("\n\t\t\t\t-or-\n\nEnter 'r' to return to \"Related Software Menu\"\n");
 			printf("\nChoice: ");
 			scanf("%s", userChoice);
 			
-			/*if (strcmp(userChoice, "r") == 0) {
-				menuRelatedSoftware(&software, &product); 		// FIX: When called does NOT display product node datas AHHHH
-			} */
 			
-		/*returns NULL to escape from product selection*/
 		/*check if user wishes to skip*/
 		if (userSkip(userChoice)) {
 			printf("Exiting Selection\n");
@@ -89,8 +84,7 @@ struct Product* displayProductsUser(struct Product* p) {
 		}
 
 
-			check = ListSearch(p, userChoice);
-			
+			check = ListSearch(p, userChoice);	
 		} while (check == NULL);
 		// this is the end and only exits if (check = ListSearch) returns != NULL
 	}
@@ -101,22 +95,23 @@ struct Product* displayProductsUser(struct Product* p) {
 struct Product* ListSearch(struct Product* p, char* userChoice) {
     struct Product* currProd = p;
 	int i;
-	
+	/*loops until all prodcuts*/
     while (currProd != NULL) {
+			/*loops through user choice and makes it all uppercase*/
 		for (i = 0; userChoice[i] != '\0'; i++) {
 		userChoice[i] = toupper(userChoice[i]);
 		}
-        if (strcmp(currProd->id, userChoice) == 0) {
+        if (strcmp(currProd->id, userChoice) == 0) { // if the Ids match return the duccent product
             return currProd;
         }
-        currProd = currProd->next;
+        currProd = currProd->next; //itterate node
     }
-    return NULL;
+    return NULL; // progrma doesn't find the ID
 }
 
 // Function flushes input to prevent loop bugs
 void flush_input( ) {
 	int check;
-	while ((check = getchar( )) != '\n' && check != EOF);
+	while ((check = getchar( )) != '\n' && check != EOF); //FLUSH modified
 }
 
