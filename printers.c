@@ -37,7 +37,7 @@ void printProductOs (struct OS* os, struct Product* p) {
 				printf("%-10s %-5s %-30s %-8s %-30s %-10s \n", 
 				"OS", "ID", "Name", "Version", "Hardware", "Release Date");
 		} else { // if no Id's 
-			printf("No Operating systems supported.\n");
+			printf("No Operating Systems supported.\n");
 		}
 		
 		/*printing all of the information*/
@@ -86,7 +86,7 @@ void printProductHype (struct Hypervisor *hype, struct Product* p) {
 	 printf("\nSupported Hypervisors:\n");
 				printf("%-5s %-30s %-8s %-10s \n",  "ID", "Name", "Version", "Release Date");
 		} else { // if no Id's 
-			printf("No Hypervisors supported.\n");
+			printf("\nNo Hypervisors supported.\n");
 		}
 		
 		/*printing all of the information*/
@@ -141,7 +141,7 @@ void printProductSoft (struct Software* sof, struct Product* p) {
 	 printf("\nSupported Related Software:\n");
 				printf("%-18s %-5s %-50s %-8s  %-10s \n", "OS", "ID", "Name", "Version",  "Release Date");
 		} else { // if no Id's 
-			printf("No Operating systems supported.\n");
+			printf("\nNo Related Software supported.\n");
 		}
 		
 		/*printing all of the information*/
